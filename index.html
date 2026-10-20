@@ -1,0 +1,3476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radha Krishna Novelty Store | Gifts, Toys & Decorative Treasures</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Poppins, Cinzel, and Cinzel Decorative -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700;900&family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- jsPDF & AutoTable for client-side invoice generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              purple: '#1c032a',
+              royal: '#3b0764',
+              plum: '#581c87',
+              pink: '#db2777',
+              rose: '#f43f5e',
+              gold: '#d97706',
+              lightgold: '#fef3c7',
+              accentGold: '#f59e0b',
+              shimmer: '#fbbf24',
+              tealPeacock: '#0d9488'
+            }
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            serif: ['Cinzel', 'serif'],
+            cinzelDeco: ['"Cinzel Decorative"', 'cursive'],
+            script: ['"Great Vibes"', 'cursive']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fdf4ff;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c084fc;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9333ea;
+    }
+
+    /* Decorative Gold Gradient Text */
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fffbeb 0%, #f59e0b 35%, #fbbf24 60%, #d97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .divine-gradient {
+      background: radial-gradient(circle at 10% 20%, rgba(219, 39, 119, 0.45) 0%, transparent 45%),
+                  radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.35) 0%, transparent 45%),
+                  radial-gradient(circle at 50% 50%, rgba(13, 148, 136, 0.25) 0%, transparent 60%),
+                  linear-gradient(135deg, #1b0230 0%, #350654 30%, #4a0e78 70%, #200438 100%);
+    }
+
+    .peacock-glow {
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.5), 0 0 45px rgba(219, 39, 119, 0.25), inset 0 0 15px rgba(219, 39, 119, 0.3);
+    }
+
+    .ornate-border {
+      border-image: linear-gradient(to right, #f59e0b, #ec4899, #0d9488, #f59e0b) 1;
+    }
+
+    /* Print Specific Invoice Styling */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printableInvoiceArea, #printableInvoiceArea * {
+        visibility: visible;
+      }
+      #printableInvoiceArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        background: white;
+        color: black;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-purple-50 via-pink-50/50 to-amber-50/60 text-gray-800 font-sans antialiased min-h-screen flex flex-col selection:bg-pink-300 selection:text-purple-900">
+
+  <div class="bg-gradient-to-r from-purple-950 via-pink-950 to-purple-950 text-amber-200 text-xs py-2 px-4 shadow-inner border-b border-amber-500/30">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center text-center gap-2">
+      <div class="flex items-center gap-2 mx-auto sm:mx-0">
+        <span class="text-amber-400 font-serif font-bold tracking-wider animate-pulse">✨ Radhe Radhe! ✨</span>
+        <span class="hidden md:inline text-purple-100">Welcome to Radha Krishna Novelty Store — Gifts, Toys & Decorative Paradise</span>
+      </div>
+      <div class="flex items-center gap-4 text-xs mx-auto sm:mx-0">
+        <span><i class="fa-solid fa-phone mr-1 text-pink-400"></i> +91 98250 12345</span>
+        <span class="hidden sm:inline text-purple-600">|</span>
+        <span class="text-purple-200"><i class="fa-solid fa-envelope mr-1 text-amber-400"></i> radhakrishnanoveltystore@gmail.com</span>
+        <span class="hidden sm:inline text-purple-600">|</span>
+        <span class="text-amber-300 font-medium"><i class="fa-solid fa-tag mr-1 text-pink-400"></i> Code: <b>FIRST10</b> (10% Off) &bull; <b>SPECIAL999</b> (₹150 off on ₹999+)</span>
+        <span class="hidden sm:inline text-purple-600">|</span>
+        <button onclick="openAdminModal()" class="text-xs bg-amber-500/20 hover:bg-amber-500/40 text-amber-300 px-3 py-0.5 rounded-full border border-amber-400/50 transition">
+          <i class="fa-solid fa-user-shield mr-1"></i>Owner Portal
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-md border-b-2 border-amber-400/70 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-4">
+        
+        <!-- Logo & Branding using Peacock Feather & Bansuri Motif -->
+        <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-3 group focus:outline-none">
+          <div class="w-14 h-14 rounded-2xl p-1 bg-gradient-to-tr from-amber-400 via-pink-500 to-purple-800 shadow-lg shadow-purple-900/30 group-hover:scale-105 transition duration-300 flex items-center justify-center border-2 border-amber-300 peacock-glow">
+            <svg class="w-full h-full drop-shadow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="46" fill="#2e0854" stroke="#f59e0b" stroke-width="2.5"/>
+              <circle cx="50" cy="50" r="42" stroke="#fbcfe8" stroke-dasharray="3 3" stroke-width="1"/>
+              <!-- Mor Pankh (Peacock Feather) -->
+              <path d="M48 20 C65 24, 75 42, 68 56 C62 68, 48 70, 38 62 C30 54, 34 32, 48 20 Z" fill="url(#featherGradient)"/>
+              <circle cx="52" cy="40" r="8" fill="#0284c7"/>
+              <circle cx="52" cy="40" r="4" fill="#fbbf24"/>
+              <!-- Golden Bansuri (Flute) -->
+              <path d="M22 66 L78 28" stroke="#f59e0b" stroke-width="4.5" stroke-linecap="round"/>
+              <circle cx="36" cy="56" r="1.5" fill="#78350f"/>
+              <circle cx="46" cy="49" r="1.5" fill="#78350f"/>
+              <circle cx="56" cy="42" r="1.5" fill="#78350f"/>
+              <circle cx="66" cy="35" r="1.5" fill="#78350f"/>
+              <!-- Lotus Base Motif -->
+              <path d="M50 78 C40 70, 30 78, 50 90 C70 78, 60 70, 50 78 Z" fill="#ec4899"/>
+              <defs>
+                <linearGradient id="featherGradient" x1="30" y1="20" x2="70" y2="70" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#047857"/>
+                  <stop offset="0.6" stop-color="#0284c7"/>
+                  <stop offset="1" stop-color="#7c3aed"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-serif font-black text-xl sm:text-2xl tracking-wider text-purple-950 group-hover:text-pink-600 transition">RADHA KRISHNA</span>
+              <span class="text-amber-500 text-sm font-semibold">🪈✨</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs uppercase tracking-widest font-bold text-pink-600 font-sans">NOVELTY STORE</span>
+              <span class="text-[10px] bg-gradient-to-r from-amber-100 to-amber-200 text-amber-900 font-bold px-1.5 py-0.2 rounded border border-amber-300">Gifts & More</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden lg:flex items-center gap-5 font-medium text-sm text-gray-700">
+          <a href="#home" onclick="navigateTo('home')" class="hover:text-purple-700 hover:border-b-2 hover:border-pink-500 py-1 transition font-medium">Home</a>
+          <a href="#catalog" onclick="navigateTo('catalog')" class="hover:text-purple-700 hover:border-b-2 hover:border-pink-500 py-1 transition font-medium">Shop All</a>
+          <a href="#categories" onclick="navigateTo('categories')" class="hover:text-purple-700 hover:border-b-2 hover:border-pink-500 py-1 transition font-medium">Categories</a>
+          <a href="#bestsellers" onclick="filterBySpecial('bestseller')" class="hover:text-purple-700 hover:border-b-2 hover:border-pink-500 py-1 transition font-medium flex items-center gap-1">
+            <span class="text-amber-500"><i class="fa-solid fa-fire"></i></span> Best Sellers
+          </a>
+          <a href="#reviews" onclick="navigateTo('reviews')" class="hover:text-purple-700 hover:border-b-2 hover:border-pink-500 py-1 transition font-medium">Reviews</a>
+          <a href="#about" onclick="navigateTo('about')" class="hover:text-purple-700 hover:border-b-2 hover:border-pink-500 py-1 transition font-medium">About Us</a>
+          <a href="#contact" onclick="navigateTo('contact')" class="hover:text-purple-700 hover:border-b-2 hover:border-pink-500 py-1 transition font-medium">Contact Us</a>
+          <button onclick="openCustomerOrdersModal()" class="text-xs text-purple-950 hover:text-white hover:bg-purple-900 font-bold flex items-center gap-1.5 bg-gradient-to-r from-amber-200 to-amber-300 text-purple-950 px-3 py-1.5 rounded-full border border-amber-400 shadow-sm transition">
+            <i class="fa-solid fa-box text-pink-600"></i> Your Orders
+          </button>
+          <button onclick="openTrackingModal()" class="text-xs text-purple-900 hover:text-pink-600 font-semibold flex items-center gap-1 bg-purple-50 px-2.5 py-1.5 rounded-lg border border-purple-200">
+            <i class="fa-solid fa-route text-amber-500"></i> Track Order
+          </button>
+        </nav>
+
+        <!-- Search Bar with Live Suggestions Dropdown -->
+        <div class="relative flex-1 max-w-xs sm:max-w-sm hidden md:block">
+          <div class="relative">
+            <input type="text" id="headerSearchInput" oninput="handleSearch(this.value)" placeholder="Search gifts, toys, decor..." class="w-full pl-10 pr-9 py-2 rounded-full border border-purple-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-sm bg-purple-50/50">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-purple-400 text-sm"></i>
+            <button onclick="clearSearch()" id="clearSearchBtn" class="hidden absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 text-xs">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div id="searchSuggestions" class="hidden absolute top-12 left-0 right-0 bg-white rounded-xl shadow-2xl border border-purple-100 overflow-hidden z-50 divide-y divide-purple-50"></div>
+        </div>
+
+        <!-- Live Chat Button & Cart Button -->
+        <div class="flex items-center gap-3">
+          <button onclick="toggleLiveChat()" class="hidden sm:flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-pink-600 to-purple-800 text-white rounded-full text-xs font-semibold shadow hover:scale-105 transition" title="Ask Questions Live">
+            <i class="fa-solid fa-comment-dots text-amber-300"></i> Live Help
+          </button>
+
+          <!-- Cart Button -->
+          <button onclick="openCartModal()" class="relative p-2.5 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-900 rounded-full hover:from-purple-200 hover:to-pink-200 transition shadow-sm flex items-center justify-center border border-purple-200" aria-label="View Shopping Cart">
+            <i class="fa-solid fa-bag-shopping text-lg text-purple-800"></i>
+            <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-pink-600 text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-pulse">0</span>
+          </button>
+
+          <!-- Mobile Menu Toggle -->
+          <button onclick="toggleMobileNav()" class="lg:hidden p-2 text-purple-900 rounded-lg hover:bg-purple-100" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Search Form -->
+      <div class="md:hidden pb-3">
+        <div class="relative">
+          <input type="text" oninput="handleSearch(this.value)" placeholder="Search gifts, toys, novelty..." class="w-full pl-9 pr-4 py-2 rounded-full border border-purple-200 text-sm bg-purple-50">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-purple-400 text-sm"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-purple-100 px-4 pt-2 pb-4 space-y-2 shadow-lg">
+      <a href="#home" onclick="navigateTo('home'); toggleMobileNav();" class="block py-2 px-3 rounded-lg hover:bg-purple-50 text-gray-800 font-medium">Home</a>
+      <a href="#catalog" onclick="navigateTo('catalog'); toggleMobileNav();" class="block py-2 px-3 rounded-lg hover:bg-purple-50 text-gray-800 font-medium">Shop All Products</a>
+      <a href="#categories" onclick="navigateTo('categories'); toggleMobileNav();" class="block py-2 px-3 rounded-lg hover:bg-purple-50 text-gray-800 font-medium">Categories</a>
+      <a href="#bestsellers" onclick="filterBySpecial('bestseller'); toggleMobileNav();" class="block py-2 px-3 rounded-lg hover:bg-purple-50 text-pink-600 font-semibold">Best Sellers 🔥</a>
+      <a href="#reviews" onclick="navigateTo('reviews'); toggleMobileNav();" class="block py-2 px-3 rounded-lg hover:bg-purple-50 text-gray-800 font-medium">Customer Reviews</a>
+      <a href="#about" onclick="navigateTo('about'); toggleMobileNav();" class="block py-2 px-3 rounded-lg hover:bg-purple-50 text-gray-800 font-medium">About Us</a>
+      <a href="#contact" onclick="navigateTo('contact'); toggleMobileNav();" class="block py-2 px-3 rounded-lg hover:bg-purple-50 text-gray-800 font-medium">Contact Us</a>
+      <button onclick="openCustomerOrdersModal(); toggleMobileNav();" class="w-full text-left py-2 px-3 rounded-lg bg-amber-100 text-purple-950 font-bold border border-amber-300">
+        <i class="fa-solid fa-box text-pink-600 mr-2"></i> Your Orders & Bills
+      </button>
+      <button onclick="openTrackingModal(); toggleMobileNav();" class="w-full text-left py-2 px-3 rounded-lg bg-purple-50 text-purple-900 font-medium">
+        <i class="fa-solid fa-route text-amber-500 mr-2"></i> Track Your Order
+      </button>
+      <div class="pt-2 border-t border-purple-100 flex flex-col gap-2">
+        <button onclick="toggleLiveChat(); toggleMobileNav();" class="w-full py-2 bg-gradient-to-r from-pink-600 to-purple-800 text-white rounded-lg text-sm font-semibold flex items-center justify-center gap-2">
+          <i class="fa-solid fa-comment-dots text-amber-300"></i> Open Live Store Chat
+        </button>
+        <button onclick="openAdminModal(); toggleMobileNav();" class="w-full py-2 bg-purple-900 text-amber-300 rounded-lg text-sm font-semibold flex items-center justify-center gap-2">
+          <i class="fa-solid fa-lock"></i> Store Admin Portal
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    
+    <section id="home" class="relative overflow-hidden divine-gradient text-white py-16 lg:py-24 shadow-2xl">
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fbbf24_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400/20 to-pink-500/20 border border-amber-300/40 px-4 py-1.5 rounded-full text-xs font-semibold text-amber-200 tracking-wide uppercase shadow">
+              <i class="fa-solid fa-sparkles text-amber-400"></i> Authentic Novelty & Joyful Gifting
+            </div>
+            
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight tracking-wide">
+              Welcome to <br>
+              <span class="gold-gradient-text drop-shadow">Radha Krishna</span><br>
+              <span class="text-pink-300 text-3xl sm:text-4xl">Novelty Store</span>
+            </h1>
+
+            <p class="text-purple-100 text-base sm:text-xl font-light max-w-xl mx-auto lg:mx-0">
+              “Discover Amazing Products at Amazing Prices!” Toys, return gifts, stationery, aesthetic home decor, keychains, and household marvels delivered directly to your doorstep.
+            </p>
+
+            <!-- Decorative Coupon Badges Highlight -->
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1">
+              <span class="bg-purple-900/80 border border-pink-400/40 text-pink-200 text-xs px-3 py-1 rounded-full flex items-center gap-1.5 shadow">
+                <i class="fa-solid fa-gift text-amber-300"></i> Code: <b class="text-amber-300">FIRST10</b> (10% Off First Order)
+              </span>
+              <span class="bg-purple-900/80 border border-amber-400/40 text-amber-200 text-xs px-3 py-1 rounded-full flex items-center gap-1.5 shadow">
+                <i class="fa-solid fa-crown text-amber-400"></i> Code: <b class="text-amber-300">SPECIAL999</b> (₹150 Off Above ₹999)
+              </span>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-3">
+              <button onclick="navigateTo('catalog')" class="px-8 py-3.5 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 text-purple-950 font-bold rounded-full shadow-lg shadow-amber-500/30 hover:scale-105 active:scale-95 transition flex items-center gap-2">
+                <i class="fa-solid fa-bag-shopping"></i> Shop Now
+              </button>
+              <button onclick="navigateTo('categories')" class="px-8 py-3.5 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold rounded-full backdrop-blur transition flex items-center gap-2">
+                <i class="fa-solid fa-layer-group"></i> Explore 15 Categories
+              </button>
+            </div>
+
+            <!-- Features Quick Badges -->
+            <div class="grid grid-cols-3 gap-3 pt-6 border-t border-purple-700/50 max-w-md mx-auto lg:mx-0 text-left">
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-certificate text-amber-400 text-xl"></i>
+                <div class="text-xs">
+                  <div class="font-bold text-white">100% Quality</div>
+                  <div class="text-purple-200">Verified products</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-truck-fast text-pink-400 text-xl"></i>
+                <div class="text-xs">
+                  <div class="font-bold text-white">Speedy Ship</div>
+                  <div class="text-purple-200">Across India</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-indian-rupee-sign text-amber-300 text-xl"></i>
+                <div class="text-xs">
+                  <div class="font-bold text-white">Best Prices</div>
+                  <div class="text-purple-200">COD Available</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Showcase Card -->
+          <div class="lg:col-span-5 relative flex justify-center">
+            <div class="relative w-full max-w-md">
+              <div class="absolute -inset-1 bg-gradient-to-r from-pink-500 to-amber-500 rounded-3xl blur opacity-75 animate-pulse"></div>
+              <div class="relative bg-purple-950/80 backdrop-blur-xl border border-purple-400/30 p-6 rounded-3xl shadow-2xl text-center">
+                <div class="relative overflow-hidden rounded-2xl mb-4 group">
+                  <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=700&q=80" alt="Novelty Gifts & Festivities" class="w-full h-64 object-cover rounded-2xl group-hover:scale-105 transition duration-500">
+                  <div class="absolute top-3 left-3 bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
+                    Festive Bonanza
+                  </div>
+                  <div class="absolute bottom-3 right-3 bg-amber-400 text-purple-950 text-xs font-black px-3 py-1 rounded-full shadow">
+                    Up to 50% OFF
+                  </div>
+                </div>
+                <h3 class="font-serif font-bold text-xl text-amber-200">Handpicked Festive & Novelty Items</h3>
+                <p class="text-xs text-purple-200 mt-1">Transform everyday moments into celebrations with our enchanting collections.</p>
+                <div class="mt-4 flex items-center justify-between text-xs bg-purple-900/60 p-3 rounded-xl border border-purple-700/50">
+                  <span class="text-pink-300 font-semibold">Special Offer: <span class="bg-pink-950 px-2 py-0.5 rounded text-amber-300 font-mono">SPECIAL999</span></span>
+                  <span class="text-amber-400 font-bold">₹150 OFF above ₹999</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="categories" class="py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-bold uppercase tracking-widest text-pink-600 bg-pink-100 px-3 py-1 rounded-full">Explore By Category</span>
+        <h2 class="text-2xl sm:text-3xl font-serif font-bold text-purple-950 mt-2">15 Curated Novelty Avenues</h2>
+        <p class="text-gray-600 text-sm mt-1">Find ideal toys, return gifts, elegant office items, and seasonal decor in one single click.</p>
+      </div>
+
+      <div id="categoryGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <!-- Rendered Dynamically via JS -->
+      </div>
+    </section>
+
+    <!-- Promotional Callout Cards -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="rounded-3xl p-6 md:p-8 bg-gradient-to-r from-purple-900 to-indigo-900 text-white relative overflow-hidden shadow-lg flex flex-col justify-between">
+          <div class="relative z-10">
+            <span class="bg-amber-400 text-purple-950 text-xs font-black uppercase px-2.5 py-1 rounded-full">Return Gifts Mega Sale</span>
+            <h3 class="text-2xl font-serif font-bold mt-3">School & Birthday Party Packs</h3>
+            <p class="text-purple-200 text-sm mt-1 max-w-xs">Buy bulk packs of stationery, keychains, and fidget puzzles at wholesale rates.</p>
+          </div>
+          <div class="mt-6 relative z-10">
+            <button onclick="filterByCategory('Birthday and Party Supplies')" class="px-5 py-2.5 bg-amber-400 hover:bg-amber-300 text-purple-950 font-bold rounded-xl text-xs transition">
+              Explore Party Bundles <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
+          </div>
+          <i class="fa-solid fa-gifts absolute right-[-20px] bottom-[-20px] text-white/10 text-9xl pointer-events-none"></i>
+        </div>
+
+        <div class="rounded-3xl p-6 md:p-8 bg-gradient-to-r from-pink-700 to-rose-900 text-white relative overflow-hidden shadow-lg flex flex-col justify-between">
+          <div class="relative z-10">
+            <span class="bg-white text-pink-700 text-xs font-black uppercase px-2.5 py-1 rounded-full">Home & Spiritual</span>
+            <h3 class="text-2xl font-serif font-bold mt-3">Radha Krishna Divine Idols & Lights</h3>
+            <p class="text-pink-100 text-sm mt-1 max-w-xs">Elevate your living space with golden LED lamps, aroma diffusers, and brass figurines.</p>
+          </div>
+          <div class="mt-6 relative z-10">
+            <button onclick="filterByCategory('Home Decoration')" class="px-5 py-2.5 bg-white hover:bg-pink-100 text-pink-700 font-bold rounded-xl text-xs transition">
+              Shop Home Decor <i class="fa-solid fa-arrow-right ml-1"></i>
+            </button>
+          </div>
+          <i class="fa-solid fa-feather-pointed absolute right-[-20px] bottom-[-20px] text-white/10 text-9xl pointer-events-none"></i>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalog" class="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 border-b border-purple-200 pb-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-purple-700 bg-purple-100 px-3 py-0.5 rounded-full">Our Complete Inventory</span>
+          <h2 class="text-2xl sm:text-3xl font-serif font-bold text-purple-950 mt-1" id="catalogTitle">All Novelty Products</h2>
+          <p class="text-xs text-gray-500" id="catalogSubtext">Showing verified products with authentic prices in Indian Rupees (₹).</p>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="flex items-center gap-2">
+            <label for="sortSelect" class="text-xs font-semibold text-gray-600">Sort By:</label>
+            <select id="sortSelect" onchange="handleSort(this.value)" class="text-xs bg-white border border-purple-200 rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-pink-500">
+              <option value="featured">Featured / Default</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Customer Rating</option>
+            </select>
+          </div>
+
+          <button onclick="resetFilters()" class="text-xs bg-purple-100 hover:bg-purple-200 text-purple-800 font-medium px-3 py-2 rounded-lg transition flex items-center gap-1">
+            <i class="fa-solid fa-rotate-left"></i> Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Filter Tags -->
+      <div class="flex flex-wrap items-center gap-2 mb-8 overflow-x-auto pb-2 scrollbar-none" id="quickFilterChips">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Products Grid -->
+      <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- No products found placeholder -->
+      <div id="noProductsFound" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed border-purple-300 p-8">
+        <i class="fa-solid fa-box-open text-5xl text-purple-300 mb-3"></i>
+        <h4 class="text-lg font-bold text-purple-900">No products match your search or filter!</h4>
+        <p class="text-sm text-gray-500 mt-1 mb-4">Try clearing your filters or search keywords.</p>
+        <button onclick="resetFilters()" class="px-5 py-2 bg-pink-600 hover:bg-pink-700 text-white rounded-xl text-xs font-semibold transition">
+          Show All Products
+        </button>
+      </div>
+    </section>
+
+    <section id="reviews" class="py-14 bg-gradient-to-b from-white to-purple-50/50 border-t border-b border-purple-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-amber-700 bg-amber-100 px-3 py-1 rounded-full">Customer Love & Feedback</span>
+            <h2 class="text-2xl sm:text-3xl font-serif font-bold text-purple-950 mt-1">Verified Customer Reviews</h2>
+            <p class="text-sm text-gray-600">Actual feedback from happy gift and toy buyers.</p>
+          </div>
+          <button onclick="openWriteReviewModal()" class="px-5 py-2.5 bg-gradient-to-r from-purple-800 to-pink-600 hover:from-purple-900 hover:to-pink-700 text-white font-semibold rounded-xl text-xs shadow-md transition flex items-center gap-2 self-start md:self-auto">
+            <i class="fa-solid fa-feather"></i> Write a Review
+          </button>
+        </div>
+
+        <!-- Aggregate Summary Card -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-purple-100 mb-8 grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+          <div class="text-center md:border-r md:border-purple-100">
+            <div class="text-4xl font-black text-purple-950" id="avgRatingDisplay">4.8</div>
+            <div class="flex justify-center text-amber-400 text-sm my-1">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+            </div>
+            <div class="text-xs text-gray-500" id="totalReviewsCountDisplay">Based on 18 Verified Purchases</div>
+          </div>
+          <div class="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-gray-600">
+            <div class="flex items-center gap-3 p-3 bg-purple-50/60 rounded-xl">
+              <i class="fa-solid fa-badge-check text-pink-600 text-2xl"></i>
+              <div>
+                <span class="font-bold text-purple-950 block">100% Genuine</span>
+                <span>All items checked before shipping</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-amber-50/60 rounded-xl">
+              <i class="fa-solid fa-shield-heart text-amber-600 text-2xl"></i>
+              <div>
+                <span class="font-bold text-purple-950 block">Moderated Content</span>
+                <span>Protected against spam & bots</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-pink-50/60 rounded-xl">
+              <i class="fa-solid fa-hand-holding-heart text-pink-600 text-2xl"></i>
+              <div>
+                <span class="font-bold text-purple-950 block">Local Customer Care</span>
+                <span>Friendly support in Gujarat</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reviews Grid -->
+        <div id="reviewsListGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rendered by JS -->
+        </div>
+
+      </div>
+    </section>
+
+    <section id="about" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="relative">
+          <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-amber-300/30">
+            <img src="https://images.unsplash.com/photo-1545231027-637d2f6210f8?auto=format&fit=crop&w=800&q=80" alt="Novelty Store Ambiance" class="w-full h-96 object-cover">
+          </div>
+          <div class="absolute -bottom-6 -right-6 bg-gradient-to-r from-purple-900 to-pink-700 text-white p-6 rounded-2xl shadow-xl max-w-xs border border-amber-300">
+            <p class="font-serif font-bold text-lg text-amber-300">Spreading Smiles</p>
+            <p class="text-xs text-purple-100 mt-1">From small kids' toys to graceful spiritual gifts, we curate wonder for every age group.</p>
+          </div>
+        </div>
+
+        <div class="space-y-5">
+          <span class="text-xs font-bold uppercase tracking-widest text-pink-600 bg-pink-100 px-3 py-1 rounded-full">Our Story & Heritage</span>
+          <h2 class="text-3xl font-serif font-bold text-purple-950">Devotion to Quality, Value & Gifting Delight</h2>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Named with reverence to <strong>Radha Krishna</strong>, our store was founded with the promise of bringing joy, color, and affordability to families, students, and gift-seekers. 
+          </p>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Whether you are picking an educational robotic puzzle for your child, preparing birthday return gift bundles for 50 classmates, or finding that unique aesthetic keychain or LED lamp, we inspect every product for supreme durability and charm.
+          </p>
+          <div class="grid grid-cols-2 gap-4 pt-2">
+            <div class="border-l-4 border-amber-400 pl-4">
+              <span class="text-xl font-black text-purple-950">5,000+</span>
+              <p class="text-xs text-gray-500">Happy Gifting Customers</p>
+            </div>
+            <div class="border-l-4 border-pink-500 pl-4">
+              <span class="text-xl font-black text-purple-950">1,200+</span>
+              <p class="text-xs text-gray-500">Novelty Products In Stock</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-16 bg-white border-t border-purple-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-bold uppercase tracking-widest text-purple-700 bg-purple-100 px-3 py-1 rounded-full">Get In Touch</span>
+          <h2 class="text-3xl font-serif font-bold text-purple-950 mt-2">We'd Love To Hear From You</h2>
+          <p class="text-gray-600 text-sm mt-1">Have bulk gift requirements or questions about an order? Reach out anytime!</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          <!-- Contact Details Card -->
+          <div class="lg:col-span-5 bg-gradient-to-br from-purple-900 via-purple-950 to-pink-950 text-white rounded-3xl p-8 shadow-xl relative overflow-hidden">
+            <h3 class="font-serif font-bold text-xl text-amber-300 mb-6">Radha Krishna Novelty Store</h3>
+            
+            <div class="space-y-5 text-sm">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-purple-800/80 border border-purple-600 flex items-center justify-center shrink-0 text-amber-400">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-white">Store Address</div>
+                  <div class="text-purple-200 text-xs mt-0.5" id="storeAddressDisplay">Shop No. 12, Krishna Complex, Main Market, Jamnagar - 361001, Gujarat, India</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-purple-800/80 border border-purple-600 flex items-center justify-center shrink-0 text-pink-400">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-white">Direct Phone</div>
+                  <div class="text-purple-200 text-xs mt-0.5">+91 98250 12345 / 0288 2554321</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-purple-800/80 border border-purple-600 flex items-center justify-center shrink-0 text-amber-300">
+                  <i class="fa-brands fa-whatsapp text-lg"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-white">WhatsApp Inquiry</div>
+                  <a href="https://wa.me/919825012345?text=Hello%20Radha%20Krishna%20Novelty%20Store" target="_blank" class="text-xs text-amber-300 underline mt-0.5 block hover:text-amber-200">
+                    Chat with our team on WhatsApp &rarr;
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-purple-800/80 border border-purple-600 flex items-center justify-center shrink-0 text-purple-300">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-white">Business Email</div>
+                  <div class="text-purple-200 text-xs mt-0.5">radhakrishnanoveltystore@gmail.com</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-purple-800/80 border border-purple-600 flex items-center justify-center shrink-0 text-amber-400">
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                  <div class="font-semibold text-white">Opening Hours</div>
+                  <div class="text-purple-200 text-xs mt-0.5">Mon - Sat: 9:30 AM – 9:00 PM<br>Sunday: 10:00 AM – 2:00 PM</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-purple-800 flex items-center gap-3">
+              <span class="text-xs text-purple-300">Follow us:</span>
+              <a href="#" class="w-8 h-8 rounded-full bg-purple-800 hover:bg-pink-600 flex items-center justify-center text-xs text-white transition"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="#" class="w-8 h-8 rounded-full bg-purple-800 hover:bg-pink-600 flex items-center justify-center text-xs text-white transition"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="w-8 h-8 rounded-full bg-purple-800 hover:bg-pink-600 flex items-center justify-center text-xs text-white transition"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+          </div>
+
+          <!-- Contact Form with Validation -->
+          <div class="lg:col-span-7 bg-purple-50/40 rounded-3xl p-8 border border-purple-100 shadow-sm">
+            <h3 class="font-serif font-bold text-xl text-purple-950 mb-2">Send us a Message</h3>
+            <p class="text-xs text-gray-500 mb-6">Fill in the form below and we will revert back within 2-4 hours.</p>
+
+            <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Full Name *</label>
+                  <input type="text" id="contactName" required placeholder="e.g. Ramesh Patel" class="w-full text-xs p-3 rounded-xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Mobile Number *</label>
+                  <input type="tel" id="contactPhone" required pattern="[0-9]{10}" placeholder="10-digit mobile number" class="w-full text-xs p-3 rounded-xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Email Address *</label>
+                  <input type="email" id="contactEmail" required placeholder="you@example.com" class="w-full text-xs p-3 rounded-xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Inquiry Subject *</label>
+                  <select id="contactSubject" class="w-full text-xs p-3 rounded-xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white">
+                    <option value="Product Inquiry">Product Inquiry</option>
+                    <option value="Bulk / Return Gifts Order">Bulk / Return Gifts Order</option>
+                    <option value="Order Status & Delivery">Order Status & Delivery</option>
+                    <option value="Wholesale Partnership">Wholesale Partnership</option>
+                    <option value="Feedback / Other">Feedback / Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-gray-700 mb-1">Your Message *</label>
+                <textarea id="contactMessage" required rows="4" placeholder="Mention product requirements, quantities or any question..." class="w-full text-xs p-3 rounded-xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white"></textarea>
+              </div>
+
+              <div class="flex items-center justify-between pt-2">
+                <span class="text-[11px] text-gray-400"><i class="fa-solid fa-lock text-amber-500 mr-1"></i> Your details are strictly confidential.</span>
+                <button type="submit" class="px-6 py-3 bg-gradient-to-r from-pink-600 to-purple-800 text-white font-bold rounded-xl text-xs hover:from-pink-700 hover:to-purple-900 shadow-md transition flex items-center gap-2">
+                  <span>Send Message</span>
+                  <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 bg-gradient-to-r from-purple-900 via-pink-900 to-purple-950 text-white text-center">
+      <div class="max-w-2xl mx-auto px-4">
+        <span class="text-amber-300 text-xs font-bold tracking-widest uppercase">Stay Updated</span>
+        <h3 class="text-2xl font-serif font-bold mt-1">Get First Look at New Arrivals & Festival Coupons</h3>
+        <p class="text-purple-200 text-xs mt-2">Subscribe to our weekly festive novelty alert. No spam, ever!</p>
+        <form onsubmit="handleNewsletter(event)" class="mt-5 flex max-w-md mx-auto gap-2">
+          <input type="email" required placeholder="Enter your email address" class="flex-1 text-xs px-4 py-3 rounded-full text-gray-900 focus:outline-none">
+          <button type="submit" class="px-6 py-3 bg-amber-400 text-purple-950 font-bold rounded-full text-xs hover:bg-amber-300 transition">
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-purple-950 text-purple-200 text-xs pt-16 pb-8 border-t-4 border-amber-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-400 flex items-center justify-center text-purple-950 font-serif font-black text-xl shadow">
+              RK
+            </div>
+            <div>
+              <span class="font-serif font-bold text-lg text-white tracking-wider block">RADHA KRISHNA</span>
+              <span class="text-[10px] text-pink-400 uppercase tracking-widest font-semibold">NOVELTY STORE</span>
+            </div>
+          </div>
+          <p class="text-purple-300 text-xs leading-relaxed max-w-sm">
+            Your trusted destination for novelty gifts, birthday accessories, soft toys, aesthetic decor, and household utilities. Delivering cheer and exceptional value with Indian warmth.
+          </p>
+          <div class="text-xs text-amber-300 pt-1">
+            <i class="fa-solid fa-location-pin mr-1"></i> Jamnagar, Gujarat, India &bull; <i class="fa-solid fa-envelope mr-1 ml-2"></i> radhakrishnanoveltystore@gmail.com
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-white uppercase tracking-wider text-xs mb-3 border-b border-purple-800 pb-1">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="#home" onclick="navigateTo('home')" class="hover:text-pink-300 transition">Home</a></li>
+            <li><a href="#catalog" onclick="navigateTo('catalog')" class="hover:text-pink-300 transition">Shop All Catalog</a></li>
+            <li><a href="#categories" onclick="navigateTo('categories')" class="hover:text-pink-300 transition">All 15 Categories</a></li>
+            <li><a href="#reviews" onclick="navigateTo('reviews')" class="hover:text-pink-300 transition">Customer Testimonials</a></li>
+            <li><button onclick="openTrackingModal()" class="hover:text-pink-300 transition text-left">Track My Order</button></li>
+            <li><a href="#about" onclick="navigateTo('about')" class="hover:text-pink-300 transition">About Our Store</a></li>
+            <li><a href="#contact" onclick="navigateTo('contact')" class="hover:text-pink-300 transition">Contact & Support</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-white uppercase tracking-wider text-xs mb-3 border-b border-purple-800 pb-1">Top Categories</h4>
+          <ul class="space-y-2">
+            <li><button onclick="filterByCategory('Toys and Games')" class="hover:text-pink-300 transition text-left">Toys and Games</button></li>
+            <li><button onclick="filterByCategory('Gift Items')" class="hover:text-pink-300 transition text-left">Gift Items</button></li>
+            <li><button onclick="filterByCategory('School and Office Stationery')" class="hover:text-pink-300 transition text-left">Stationery Items</button></li>
+            <li><button onclick="filterByCategory('Home Decoration')" class="hover:text-pink-300 transition text-left">Home Decoration</button></li>
+            <li><button onclick="filterByCategory('Return Gifts and Gift Sets')" class="hover:text-pink-300 transition text-left">Return Gifts & Sets</button></li>
+            <li><button onclick="filterByCategory('Seasonal and Festival Items')" class="hover:text-pink-300 transition text-left">Festival Specials</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-white uppercase tracking-wider text-xs mb-3 border-b border-purple-800 pb-1">Store Policies</h4>
+          <ul class="space-y-2">
+            <li><button onclick="openPolicyModal('Shipping Policy')" class="hover:text-pink-300 transition text-left">Shipping Policy</button></li>
+            <li><button onclick="openPolicyModal('Return and Refund Policy')" class="hover:text-pink-300 transition text-left">Return & Refund Policy</button></li>
+            <li><button onclick="openPolicyModal('Privacy Policy')" class="hover:text-pink-300 transition text-left">Privacy Policy</button></li>
+            <li><button onclick="openPolicyModal('Terms and Conditions')" class="hover:text-pink-300 transition text-left">Terms & Conditions</button></li>
+            <li><button onclick="openAdminModal()" class="text-amber-400 hover:text-amber-300 transition text-left flex items-center gap-1 font-semibold"><i class="fa-solid fa-lock text-[10px]"></i> Owner Portal</button></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="border-t border-purple-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-purple-400">
+        <div>
+          &copy; 2026 Radha Krishna Novelty Store. All Rights Reserved.
+        </div>
+        <div class="flex items-center gap-4 text-sm text-amber-400">
+          <i class="fa-brands fa-cc-visa"></i>
+          <i class="fa-brands fa-cc-mastercard"></i>
+          <span class="text-xs font-mono font-bold bg-purple-900 px-2 py-0.5 rounded text-white">UPI / RuPay</span>
+          <span class="text-xs font-mono font-bold bg-purple-900 px-2 py-0.5 rounded text-pink-300">Cash on Delivery</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="productDetailModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl relative animate-fade-in my-8 border border-purple-200">
+      <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-9 h-9 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full flex items-center justify-center text-sm transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2">
+        <div class="bg-purple-50/50 p-6 flex flex-col items-center justify-center relative overflow-hidden group">
+          <div class="relative overflow-hidden rounded-2xl w-full h-72 sm:h-80 flex items-center justify-center bg-white shadow-inner">
+            <img id="modalProductImg" src="" alt="Product Detail" class="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-125 cursor-zoom-in">
+          </div>
+          <p class="text-[11px] text-purple-600 mt-2 flex items-center gap-1">
+            <i class="fa-solid fa-magnifying-glass-plus"></i> Hover over image to zoom
+          </p>
+        </div>
+
+        <div class="p-6 sm:p-8 flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between text-xs text-purple-600 mb-1">
+              <span id="modalCategory" class="font-semibold uppercase tracking-wider bg-purple-100 px-2.5 py-0.5 rounded-full">Category</span>
+              <span id="modalSku" class="font-mono text-gray-400">SKU: RK-000</span>
+            </div>
+
+            <h3 id="modalTitle" class="text-xl font-serif font-bold text-purple-950 mt-1">Product Title</h3>
+
+            <div class="flex items-center gap-2 mt-2">
+              <div class="flex text-amber-400 text-xs" id="modalStars"></div>
+              <span id="modalRatingText" class="text-xs font-semibold text-gray-700">4.8 (24 reviews)</span>
+            </div>
+
+            <div class="mt-4 flex items-baseline gap-3">
+  <!-- Customer "Your Orders" Modal -->
+  <div id="customerOrdersModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative my-6 border-2 border-purple-900 max-h-[90vh] overflow-y-auto">
+      <button onclick="closeCustomerOrdersModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center text-sm transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-6 border-b border-purple-100 pb-3">
+        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl shadow-inner">
+          <i class="fa-solid fa-boxes-packing"></i>
+        </div>
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-pink-600 bg-pink-100 px-2 py-0.5 rounded-full">Your Purchase History</span>
+          <h3 class="font-serif font-bold text-xl text-purple-950 mt-1">Your Orders & Invoices</h3>
+          <p class="text-xs text-gray-500">Track delivery status, view items, print bills, and download GST tax invoices.</p>
+        </div>
+      </div>
+
+      <div id="customerOrdersListContainer" class="space-y-4">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Store Notification Toast / Alert for Order Dispatch to Store Gmail -->
+  <div id="emailBroadcastNotice" class="hidden fixed top-6 right-6 z-50 max-w-sm bg-purple-950 text-white p-4 rounded-2xl border-2 border-amber-400 shadow-2xl animate-fade-in text-xs">
+    <div class="flex items-start gap-3">
+      <div class="w-8 h-8 rounded-xl bg-amber-400 text-purple-950 flex items-center justify-center font-bold shrink-0">
+        <i class="fa-solid fa-envelope-circle-check text-sm"></i>
+      </div>
+      <div>
+        <span class="font-bold text-amber-300 block">Order Dispatched to Store Gmail!</span>
+        <p class="text-purple-200 text-[11px] mt-0.5" id="emailBroadcastDetails">
+          Complete bill copy sent to radhakrishnanoveltystore@gmail.com and stored in Admin Portal.
+        </p>
+      </div>
+      <button onclick="document.getElementById('emailBroadcastNotice').classList.add('hidden')" class="text-purple-300 hover:text-white">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="cartModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex justify-end transition-opacity">
+    <div class="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between animate-slide-left">
+      
+      <div class="p-4 sm:p-5 border-b border-purple-100 flex items-center justify-between bg-gradient-to-r from-purple-900 to-pink-900 text-white">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-bag-shopping text-amber-300"></i>
+          <h3 class="font-serif font-bold text-base">Your Novelty Cart</h3>
+          <span id="cartHeaderBadge" class="bg-pink-600 text-white text-[11px] px-2 py-0.5 rounded-full font-bold">0</span>
+        </div>
+        <button onclick="closeCartModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Cart Bottom / Checkout Summary -->
+      <div class="p-4 sm:p-5 border-t border-purple-100 bg-purple-50/50 space-y-3">
+        <!-- Coupon input supporting FIRST10 & SPECIAL999 -->
+        <div class="space-y-1">
+          <div class="flex gap-2">
+            <input type="text" id="couponCodeInput" placeholder="Enter FIRST10 or SPECIAL999" class="uppercase flex-1 text-xs px-3 py-2 rounded-xl border border-purple-200 focus:outline-none focus:ring-1 focus:ring-pink-500 bg-white">
+            <button onclick="applyCoupon()" class="px-4 py-2 bg-purple-900 hover:bg-purple-950 text-amber-300 font-bold rounded-xl text-xs transition">
+              Apply
+            </button>
+          </div>
+          <div class="flex items-center gap-2 text-[10px] text-gray-500 pt-0.5">
+            <span class="cursor-pointer text-pink-600 underline font-semibold" onclick="quickApplyCoupon('FIRST10')">FIRST10 (10% Off)</span>
+            <span>&bull;</span>
+            <span class="cursor-pointer text-amber-700 underline font-semibold" onclick="quickApplyCoupon('SPECIAL999')">SPECIAL999 (₹150 off &gt; ₹999)</span>
+          </div>
+        </div>
+
+        <div id="couponAppliedBadge" class="hidden text-[11px] text-emerald-700 bg-emerald-100 p-1.5 rounded-lg flex items-center justify-between">
+          <span><i class="fa-solid fa-tag mr-1"></i> Coupon <b id="appliedCouponName"></b> applied!</span>
+          <button onclick="removeCoupon()" class="text-rose-600 font-bold ml-2">Remove</button>
+        </div>
+
+        <!-- Calculations -->
+        <div class="space-y-1.5 text-xs text-gray-600 pt-1">
+          <div class="flex justify-between">
+            <span>Items Subtotal:</span>
+            <span class="font-medium text-gray-900" id="cartSubtotalText">₹0</span>
+          </div>
+          <div class="flex justify-between text-pink-600" id="cartDiscountRow">
+            <span>Coupon Discount:</span>
+            <span class="font-medium" id="cartDiscountText">- ₹0</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Delivery Charges:</span>
+            <span class="font-medium text-emerald-700" id="cartShippingText">FREE</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Estimated Taxes (GST 5% incl.):</span>
+            <span class="font-medium text-gray-900" id="cartTaxText">₹0</span>
+          </div>
+          <div class="border-t border-purple-200 pt-2 flex justify-between text-sm font-bold text-purple-950">
+            <span>Total Payable:</span>
+            <span class="text-base text-pink-700" id="cartTotalText">₹0</span>
+          </div>
+        </div>
+
+        <button onclick="openCheckoutModal()" id="cartCheckoutBtn" class="w-full py-3.5 bg-gradient-to-r from-pink-600 to-purple-800 hover:from-pink-700 hover:to-purple-900 text-white font-bold rounded-xl text-xs uppercase tracking-wider shadow-lg transition flex items-center justify-center gap-2">
+          <span>Proceed To Checkout</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="checkoutModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative my-8 border border-purple-200 max-h-[90vh] overflow-y-auto">
+      <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center text-sm transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-6 border-b border-purple-100 pb-3">
+        <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 flex items-center justify-center">
+          <i class="fa-solid fa-truck-ramp-box"></i>
+        </div>
+        <div>
+          <h3 class="font-serif font-bold text-lg text-purple-950">Shipping & Order Confirmation</h3>
+          <p class="text-xs text-gray-500">Provide shipping details for automatic invoice generation.</p>
+        </div>
+      </div>
+
+      <form id="checkoutForm" onsubmit="processOrderPlacement(event)" class="space-y-4">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Customer Full Name *</label>
+            <input type="text" id="custName" required placeholder="e.g. Priyanshu Sharma" class="w-full text-xs p-2.5 rounded-xl border border-purple-200 focus:outline-none focus:ring-1 focus:ring-pink-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Mobile Contact *</label>
+            <input type="tel" id="custPhone" required pattern="[0-9]{10}" placeholder="10-digit phone number" class="w-full text-xs p-2.5 rounded-xl border border-purple-200 focus:outline-none focus:ring-1 focus:ring-pink-500">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Email for Invoice *</label>
+            <input type="email" id="custEmail" required placeholder="customer@email.com" class="w-full text-xs p-2.5 rounded-xl border border-purple-200 focus:outline-none focus:ring-1 focus:ring-pink-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">PIN Code *</label>
+            <input type="text" id="custPin" required pattern="[0-9]{6}" placeholder="e.g. 361001" class="w-full text-xs p-2.5 rounded-xl border border-purple-200 focus:outline-none focus:ring-1 focus:ring-pink-500">
+          </div>
+        </div>
+
+        <!-- Dedicated Coupon Code Section Placed Directly Below PIN Code -->
+        <div class="p-3.5 bg-gradient-to-r from-purple-50 via-pink-50 to-amber-50 rounded-2xl border-2 border-dashed border-amber-300 shadow-sm">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-xs font-bold text-purple-950 flex items-center gap-1.5">
+              <i class="fa-solid fa-gift text-pink-600"></i> Have a Promotional Coupon?
+            </span>
+            <span class="text-[10px] text-amber-700 font-bold bg-amber-100 px-2 py-0.5 rounded-full">Special Savings</span>
+          </div>
+
+          <div class="flex gap-2">
+            <input type="text" id="checkoutCouponInput" placeholder="Enter FIRST10 or SPECIAL999" class="uppercase flex-1 text-xs px-3 py-2 rounded-xl border border-purple-300 focus:outline-none focus:ring-1 focus:ring-pink-500 bg-white shadow-sm font-semibold">
+            <button type="button" onclick="applyCheckoutCoupon()" class="px-4 py-2 bg-gradient-to-r from-purple-900 to-pink-700 hover:from-purple-950 hover:to-pink-800 text-amber-300 font-bold rounded-xl text-xs transition shadow-sm">
+              Apply
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+            <button type="button" onclick="quickApplyCheckoutCoupon('FIRST10')" class="text-left p-2 rounded-xl bg-white/95 border border-pink-200 hover:border-pink-500 transition shadow-xs flex items-center justify-between group">
+              <div>
+                <span class="font-bold text-xs text-pink-700 block group-hover:text-pink-900"><i class="fa-solid fa-tag text-[10px] mr-1"></i>FIRST10</span>
+                <span class="text-[10px] text-gray-500">10% discount on your order</span>
+              </div>
+              <span class="text-[10px] bg-pink-100 text-pink-800 font-bold px-2 py-0.5 rounded">Tap</span>
+            </button>
+
+            <button type="button" onclick="quickApplyCheckoutCoupon('SPECIAL999')" class="text-left p-2 rounded-xl bg-white/95 border border-amber-300 hover:border-amber-500 transition shadow-xs flex items-center justify-between group">
+              <div>
+                <span class="font-bold text-xs text-amber-800 block group-hover:text-amber-950"><i class="fa-solid fa-crown text-[10px] mr-1"></i>SPECIAL999</span>
+                <span class="text-[10px] text-gray-500">Flat ₹150 off on ₹999+</span>
+              </div>
+              <span class="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded">Tap</span>
+            </button>
+          </div>
+
+          <div id="checkoutCouponAppliedBadge" class="hidden text-xs text-emerald-800 bg-emerald-100/90 p-2 rounded-xl mt-2 flex items-center justify-between border border-emerald-300">
+            <span><i class="fa-solid fa-circle-check text-emerald-600 mr-1.5"></i> Coupon <b id="checkoutAppliedCouponName"></b> successfully applied!</span>
+            <button type="button" onclick="removeCheckoutCoupon()" class="text-rose-600 hover:text-rose-800 font-bold ml-2 text-xs">Remove</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Complete Delivery Address *</label>
+          <input type="text" id="custAddress" required placeholder="Flat/House No., Building, Street Name, Area" class="w-full text-xs p-2.5 rounded-xl border border-purple-200 focus:outline-none focus:ring-1 focus:ring-pink-500">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">City *</label>
+            <input type="text" id="custCity" required value="Jamnagar" class="w-full text-xs p-2.5 rounded-xl border border-purple-200 focus:outline-none focus:ring-1 focus:ring-pink-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">State *</label>
+            <input type="text" id="custState" required value="Gujarat" class="w-full text-xs p-2.5 rounded-xl border border-purple-200 focus:outline-none focus:ring-1 focus:ring-pink-500">
+          </div>
+        </div>
+
+        <!-- Payment Mode Selection -->
+        <div class="pt-2">
+          <label class="block text-xs font-semibold text-gray-800 mb-2">Select Payment Method *</label>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="border border-purple-300 rounded-xl p-3 flex items-center gap-2 cursor-pointer hover:bg-purple-50 transition has-[:checked]:border-pink-600 has-[:checked]:bg-pink-50/50">
+              <input type="radio" name="paymentMethod" value="Cash on Delivery" checked class="text-pink-600 focus:ring-pink-500">
+              <div>
+                <span class="text-xs font-bold text-gray-800 block">Cash On Delivery</span>
+                <span class="text-[10px] text-gray-500">Pay cash upon parcel delivery</span>
+              </div>
+            </label>
+
+            <label class="border border-purple-300 rounded-xl p-3 flex items-center gap-2 cursor-pointer hover:bg-purple-50 transition has-[:checked]:border-pink-600 has-[:checked]:bg-pink-50/50">
+              <input type="radio" name="paymentMethod" value="Online UPI / Razorpay" class="text-pink-600 focus:ring-pink-500">
+              <div>
+                <span class="text-xs font-bold text-gray-800 block">Razorpay / UPI</span>
+                <span class="text-[10px] text-gray-500">Instant UPI, QR or Cards</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded-xl flex items-center justify-between text-xs">
+          <div>
+            <span class="text-gray-600">Grand Total to Pay:</span>
+            <span class="text-pink-700 font-bold text-sm ml-1" id="checkoutModalTotal">₹0</span>
+          </div>
+          <span class="text-[11px] text-purple-700 font-semibold"><i class="fa-solid fa-file-invoice mr-1"></i> Auto-Invoice Generated</span>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" id="confirmOrderBtn" class="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold rounded-xl text-xs uppercase tracking-wider shadow-lg transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-shield-check text-sm"></i> Confirm Order & Generate Bill
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <div id="razorpayModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl relative border-2 border-indigo-600 text-center animate-fade-in">
+      <div class="w-12 h-12 bg-indigo-100 text-indigo-700 rounded-2xl flex items-center justify-center mx-auto mb-3 text-xl font-bold">
+        ₹
+      </div>
+      <h3 class="font-serif font-bold text-lg text-purple-950">Razorpay Secure Checkout</h3>
+      <p class="text-xs text-gray-500 mb-4">Radha Krishna Novelty Store &bull; Jamnagar</p>
+      
+      <div class="bg-purple-50 p-3 rounded-xl mb-4 text-xs font-bold text-purple-900 flex justify-between">
+        <span>Amount Payable:</span>
+        <span id="gatewayPayableAmount">₹0</span>
+      </div>
+
+      <div class="space-y-2 mb-4 text-left">
+        <label class="block text-[11px] font-semibold text-gray-700">Scan UPI QR or select App:</label>
+        <div class="p-3 bg-gray-50 rounded-xl border border-dashed border-gray-300 flex items-center justify-center gap-3">
+          <i class="fa-brands fa-google-pay text-2xl text-blue-600"></i>
+          <i class="fa-solid fa-mobile-screen-button text-2xl text-purple-600"></i>
+          <span class="text-xs font-mono font-bold text-gray-600">rkstore@upi</span>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <button onclick="finalizeOnlinePayment(true)" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition">
+          <i class="fa-solid fa-check-circle mr-1"></i> Simulate Payment Success
+        </button>
+        <button onclick="finalizeOnlinePayment(false)" class="w-full py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold rounded-xl text-xs transition">
+          Simulate Payment Failure / Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="orderSuccessModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-3xl w-full p-4 sm:p-8 shadow-2xl relative my-6 border-2 border-amber-300 max-h-[92vh] overflow-y-auto">
+      
+      <div class="no-print text-center mb-6">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner mb-3">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h3 class="font-serif font-bold text-2xl text-purple-950">Order Placed Successfully!</h3>
+        <p class="text-xs text-gray-600 mt-1">Thank you for shopping at Radha Krishna Novelty Store. Your official GST invoice has been generated below.</p>
+        
+        <!-- Mandatory Working Action Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-3 mt-4">
+          <button onclick="printCurrentInvoice()" class="px-5 py-2.5 bg-purple-900 hover:bg-purple-950 text-amber-300 font-bold rounded-xl text-xs transition shadow-md flex items-center gap-2">
+            <i class="fa-solid fa-print"></i> Print Invoice
+          </button>
+          
+          <button onclick="downloadInvoicePDF()" class="px-5 py-2.5 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-xl text-xs transition shadow-md flex items-center gap-2">
+            <i class="fa-solid fa-file-pdf"></i> Download Invoice PDF
+          </button>
+
+          <button onclick="closeOrderSuccessModal()" class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-xl text-xs transition">
+            Continue Shopping
+          </button>
+        </div>
+      </div>
+
+      <!-- Printable Invoice Area (A4 layout standards) -->
+      <div id="printableInvoiceArea" class="border border-purple-200 p-6 rounded-2xl bg-white text-gray-900 text-xs shadow-sm font-sans">
+        
+        <div class="flex flex-col sm:flex-row justify-between items-start border-b-2 border-purple-900 pb-4 gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl bg-purple-900 text-amber-400 font-serif font-bold text-xl flex items-center justify-center shadow">
+              RK
+            </div>
+            <div>
+              <h2 class="font-serif font-bold text-lg text-purple-950 leading-tight">RADHA KRISHNA NOVELTY STORE</h2>
+              <p class="text-[11px] text-gray-600">Gifts, Toys, Stationery & Home Decor</p>
+              <p class="text-[10px] text-gray-500">Shop No. 12, Krishna Complex, Jamnagar - 361001, Gujarat</p>
+              <p class="text-[10px] text-gray-500">GSTIN: 24AAAFR8921N1Z0 | Phone: +91 98250 12345 | Email: radhakrishnanoveltystore@gmail.com</p>
+            </div>
+          </div>
+          
+          <div class="text-right sm:text-right w-full sm:w-auto">
+            <span class="inline-block bg-purple-900 text-amber-300 font-bold uppercase text-[10px] px-2.5 py-1 rounded">Tax Invoice / Bill of Supply</span>
+            <div class="mt-2 text-xs">
+              <div><span class="font-bold">Invoice No:</span> <span id="invNumber" class="font-mono text-purple-900 font-bold">INV-1001</span></div>
+              <div><span class="font-bold">Order ID:</span> <span id="invOrderId" class="font-mono">RK-ORD-001</span></div>
+              <div><span class="font-bold">Date & Time:</span> <span id="invDate">2026-10-19</span></div>
+              <div><span class="font-bold">Payment Method:</span> <span id="invPaymentMode" class="text-emerald-700 font-semibold">COD</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 py-4 border-b border-gray-200">
+          <div>
+            <h4 class="font-bold text-gray-800 uppercase text-[10px] tracking-wider mb-1">Billed & Shipped To:</h4>
+            <div id="invCustomerName" class="font-bold text-purple-950 text-xs">Priyanshu Sharma</div>
+            <div id="invCustomerAddress" class="text-gray-600 text-[11px] leading-tight">Krishna Nagar, Street 4, Jamnagar, Gujarat - 361001</div>
+            <div id="invCustomerPhone" class="text-gray-600 text-[11px]">Phone: +91 98250 00000</div>
+            <div id="invCustomerEmail" class="text-gray-600 text-[11px]">Email: customer@example.com</div>
+          </div>
+          <div class="text-right">
+            <h4 class="font-bold text-gray-800 uppercase text-[10px] tracking-wider mb-1">Order Status:</h4>
+            <span class="inline-block bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full" id="invStatusBadge">Confirmed / Dispatched</span>
+            <div class="text-[10px] text-gray-500 mt-2">Expected delivery in 2-3 business days.</div>
+          </div>
+        </div>
+
+        <div class="py-4 overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-purple-100/70 text-purple-950 border-b border-purple-200">
+                <th class="p-2 font-bold">#</th>
+                <th class="p-2 font-bold">Product Description & SKU</th>
+                <th class="p-2 font-bold text-center">Qty</th>
+                <th class="p-2 font-bold text-right">Unit Price</th>
+                <th class="p-2 font-bold text-right">Total (₹)</th>
+              </tr>
+            </thead>
+            <tbody id="invItemsTableBody" class="divide-y divide-gray-100">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex justify-end pt-2 border-t border-gray-200">
+          <div class="w-64 space-y-1 text-xs">
+            <div class="flex justify-between text-gray-600">
+              <span>Subtotal:</span>
+              <span id="invSubtotal" class="font-medium">₹0.00</span>
+            </div>
+            <div class="flex justify-between text-pink-700">
+              <span>Discount Applied:</span>
+              <span id="invDiscount" class="font-medium">- ₹0.00</span>
+            </div>
+            <div class="flex justify-between text-gray-600">
+              <span>Estimated Tax (GST 5% Incl.):</span>
+              <span id="invTax" class="font-medium">₹0.00</span>
+            </div>
+            <div class="flex justify-between text-gray-600">
+              <span>Shipping Charges:</span>
+              <span id="invShipping" class="font-medium text-emerald-700">FREE</span>
+            </div>
+            <div class="flex justify-between text-sm font-bold text-purple-950 border-t border-purple-900 pt-1.5 mt-1">
+              <span>Grand Total:</span>
+              <span id="invGrandTotal" class="text-pink-700">₹0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-dashed border-gray-300 flex justify-between items-center text-[10px] text-gray-500">
+          <div>
+            <p class="font-semibold text-purple-900">Thank you for your purchase from Radha Krishna Novelty Store!</p>
+            <p>For any queries, please call +91 98250 12345 or radhakrishnanoveltystore@gmail.com</p>
+          </div>
+          <div class="text-right">
+            <div class="font-serif font-bold text-purple-950 text-xs">Radha Krishna Novelty Store</div>
+            <div class="text-gray-400">Authorized Signature</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div id="orderTrackingModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative border border-purple-200">
+      <button onclick="closeTrackingModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center text-sm transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center">
+          <i class="fa-solid fa-route text-lg"></i>
+        </div>
+        <div>
+          <h3 class="font-serif font-bold text-lg text-purple-950">Track Your Order</h3>
+          <p class="text-xs text-gray-500">Enter Order ID to view shipment & bill.</p>
+        </div>
+      </div>
+
+      <form onsubmit="handleTrackOrder(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Order ID</label>
+          <input type="text" id="trackOrderIdInput" required placeholder="e.g. RK-ORD-101" class="w-full text-xs p-3 rounded-xl border border-purple-200 uppercase font-mono">
+        </div>
+        <button type="submit" class="w-full py-2.5 bg-purple-900 hover:bg-purple-950 text-amber-300 font-bold rounded-xl text-xs transition">
+          Find Order Status
+        </button>
+      </form>
+
+      <div id="trackResultBox" class="hidden mt-4 pt-4 border-t border-purple-100 text-xs space-y-2">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <div id="writeReviewModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative border border-purple-200">
+      <button onclick="closeWriteReviewModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center text-sm transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-2 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-700 flex items-center justify-center">
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <div>
+          <h3 class="font-serif font-bold text-lg text-purple-950">Write a Review</h3>
+          <p class="text-xs text-gray-500">Share your shopping experience with fellow buyers.</p>
+        </div>
+      </div>
+
+      <form id="reviewSubmitForm" onsubmit="handleReviewSubmit(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Your Rating *</label>
+          <div class="flex items-center gap-2 text-2xl text-amber-400 cursor-pointer" id="starRatingSelector">
+            <i class="fa-solid fa-star" onclick="setFormRating(1)"></i>
+            <i class="fa-solid fa-star" onclick="setFormRating(2)"></i>
+            <i class="fa-solid fa-star" onclick="setFormRating(3)"></i>
+            <i class="fa-solid fa-star" onclick="setFormRating(4)"></i>
+            <i class="fa-solid fa-star" onclick="setFormRating(5)"></i>
+          </div>
+          <input type="hidden" id="reviewRatingInput" value="5">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Your Full Name *</label>
+          <input type="text" id="reviewAuthor" required placeholder="e.g. Anjali Shah" class="w-full text-xs p-2.5 rounded-xl border border-purple-200 focus:outline-none focus:ring-1 focus:ring-pink-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Review Title *</label>
+          <input type="text" id="reviewTitle" required placeholder="e.g. Wonderful soft toy, kids loved it!" class="w-full text-xs p-2.5 rounded-xl border border-purple-200 focus:outline-none focus:ring-1 focus:ring-pink-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-gray-700 mb-1">Detailed Feedback *</label>
+          <textarea id="reviewComment" required rows="3" placeholder="Tell us about the quality, packing, and overall satisfaction..." class="w-full text-xs p-2.5 rounded-xl border border-purple-200 focus:outline-none focus:ring-1 focus:ring-pink-500"></textarea>
+        </div>
+
+        <p class="text-[11px] text-gray-400"><i class="fa-solid fa-shield mr-1"></i> Reviews are queued for owner moderation before public showcase.</p>
+
+        <button type="submit" class="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-xl text-xs transition">
+          Submit Review for Verification
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="policyModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative border border-purple-200">
+      <button onclick="closePolicyModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 flex items-center justify-center text-sm transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 class="font-serif font-bold text-lg text-purple-950 mb-3" id="policyModalTitle">Store Policy</h3>
+      <div class="text-xs text-gray-600 space-y-3 leading-relaxed max-h-80 overflow-y-auto pr-1" id="policyModalContent"></div>
+    </div>
+  </div>
+
+  <div id="adminPortalModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-5xl w-full p-6 sm:p-8 shadow-2xl relative my-6 border-2 border-purple-900 max-h-[92vh] flex flex-col justify-between overflow-y-auto">
+      
+      <button onclick="closeAdminModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center text-sm transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Admin Login View without hint -->
+      <div id="adminLoginView" class="max-w-md mx-auto py-10 text-center w-full">
+        <div class="w-16 h-16 rounded-2xl bg-purple-900 text-amber-300 text-2xl flex items-center justify-center mx-auto shadow mb-4">
+          <i class="fa-solid fa-user-shield"></i>
+        </div>
+        <h3 class="font-serif font-bold text-2xl text-purple-950">Store Owner Dashboard</h3>
+        <p class="text-xs text-gray-500 mt-1 mb-6">Enter administrative password to manage live orders, profits, invoices, inventory, and reviews.</p>
+
+        <form onsubmit="handleAdminLogin(event)" class="space-y-4 text-left">
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1">Administrative Password</label>
+            <input type="password" id="adminPasswordInput" required placeholder="Enter password" class="w-full text-xs p-3 rounded-xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-pink-500">
+          </div>
+          <div id="adminLoginError" class="hidden text-xs text-rose-600 font-semibold bg-rose-50 p-2.5 rounded-xl border border-rose-200 text-center">
+            Invalid Administrator Password. Access Denied.
+          </div>
+          <button type="submit" class="w-full py-3 bg-purple-900 hover:bg-purple-950 text-amber-300 font-bold rounded-xl text-xs uppercase tracking-wider transition shadow">
+            Unlock Dashboard
+          </button>
+        </form>
+      </div>
+
+      <!-- Admin Dashboard View (Unlocked) -->
+      <div id="adminDashboardView" class="hidden space-y-6">
+        
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-purple-100 pb-4 gap-2">
+          <div>
+            <span class="text-[10px] font-bold uppercase bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded">Authorized Session</span>
+            <h3 class="font-serif font-bold text-xl text-purple-950">Radha Krishna Store Control Room</h3>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="handleAdminLogout()" class="px-3.5 py-1.5 bg-rose-100 hover:bg-rose-200 text-rose-700 text-xs font-bold rounded-xl transition flex items-center gap-1.5">
+              <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap gap-2 border-b border-purple-100 pb-2">
+          <button onclick="switchAdminTab('liveOrders')" id="tabBtn-liveOrders" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-900 text-amber-300 transition">
+            <i class="fa-solid fa-chart-line mr-1"></i> Live Orders & Profit
+          </button>
+          <button onclick="switchAdminTab('ordersInvoices')" id="tabBtn-ordersInvoices" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-50 text-purple-900 hover:bg-purple-100 transition">
+            <i class="fa-solid fa-file-invoice mr-1"></i> Orders & Invoices Hub
+          </button>
+          <button onclick="switchAdminTab('reviewApproval')" id="tabBtn-reviewApproval" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-50 text-purple-900 hover:bg-purple-100 transition flex items-center gap-1">
+            <i class="fa-solid fa-comments mr-1"></i> Review Approvals
+            <span id="adminPendingReviewCount" class="bg-pink-600 text-white text-[10px] px-1.5 rounded-full ml-1">0</span>
+          </button>
+          <button onclick="switchAdminTab('liveChatSupport')" id="tabBtn-liveChatSupport" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-50 text-purple-900 hover:bg-purple-100 transition flex items-center gap-1">
+            <i class="fa-solid fa-headset mr-1"></i> Live Customer Chats
+            <span id="adminUnreadChatBadge" class="bg-emerald-600 text-white text-[10px] px-1.5 rounded-full ml-1">1</span>
+          </button>
+          <button onclick="switchAdminTab('productsInventory')" id="tabBtn-productsInventory" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-50 text-purple-900 hover:bg-purple-100 transition">
+            <i class="fa-solid fa-boxes-stacked mr-1"></i> Inventory & Stock
+          </button>
+          <button onclick="switchAdminTab('cancelledEmailsLog')" id="tabBtn-cancelledEmailsLog" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-50 text-purple-900 hover:bg-purple-100 transition flex items-center gap-1">
+            <i class="fa-solid fa-envelope-open-text mr-1"></i> Dispatched Cancellation Emails
+          </button>
+          <button onclick="switchAdminTab('messages')" id="tabBtn-messages" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-50 text-purple-900 hover:bg-purple-100 transition">
+            <i class="fa-solid fa-envelope mr-1"></i> Contact Forms
+          </button>
+        </div>
+
+        <!-- Tab 1: Live Orders & Purchase Profit Section -->
+        <div id="adminTab-liveOrders" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+            <div class="bg-purple-50 p-4 rounded-2xl border border-purple-200">
+              <span class="text-xs text-gray-500 font-semibold block">Total Revenue (₹)</span>
+              <span class="text-2xl font-black text-purple-950" id="statRevenue">₹0</span>
+              <span class="text-[10px] text-gray-400 block mt-1">Confirmed billing</span>
+            </div>
+            <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+              <span class="text-xs text-emerald-800 font-semibold block">Estimated Purchase Profit</span>
+              <span class="text-2xl font-black text-emerald-700" id="statProfit">₹0</span>
+              <span class="text-[10px] text-emerald-600 block mt-1">Net profit after item cost</span>
+            </div>
+            <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200">
+              <span class="text-xs text-amber-800 font-semibold block">Active Orders</span>
+              <span class="text-2xl font-black text-amber-800" id="statTotalOrders">0</span>
+              <span class="text-[10px] text-amber-600 block mt-1">Live database count</span>
+            </div>
+            <div class="bg-pink-50 p-4 rounded-2xl border border-pink-200">
+              <span class="text-xs text-pink-800 font-semibold block">Items Sold</span>
+              <span class="text-2xl font-black text-pink-800" id="statItemsSold">0</span>
+              <span class="text-[10px] text-pink-600 block mt-1">Units shipped</span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-sm text-purple-950">Real-Time Live Orders & Profit Hub</h4>
+            <span class="text-xs text-gray-500">Live order processing with cancel & delete options</span>
+          </div>
+
+          <div class="overflow-x-auto border border-purple-100 rounded-2xl">
+            <table class="w-full text-xs text-left">
+              <thead class="bg-purple-100 text-purple-950 font-bold">
+                <tr>
+                  <th class="p-3">Order ID</th>
+                  <th class="p-3">Customer</th>
+                  <th class="p-3">Items Summary</th>
+                  <th class="p-3">Order Value</th>
+                  <th class="p-3">Net Profit</th>
+                  <th class="p-3">Status</th>
+                  <th class="p-3 text-center">Manage Order</th>
+                </tr>
+              </thead>
+              <tbody id="adminLiveOrdersBody" class="divide-y divide-purple-50">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 2: Orders & Invoices Master Repository -->
+        <div id="adminTab-ordersInvoices" class="hidden space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-sm text-purple-950">Invoices & Purchase Bills Master Repository</h4>
+              <p class="text-xs text-gray-500">Every placed order generates a legal GST invoice bill stored here with cancel/delete management.</p>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto border border-purple-100 rounded-2xl">
+            <table class="w-full text-xs text-left">
+              <thead class="bg-purple-100 text-purple-950 font-bold">
+                <tr>
+                  <th class="p-3">Invoice Number</th>
+                  <th class="p-3">Order ID</th>
+                  <th class="p-3">Billed Customer</th>
+                  <th class="p-3">Address</th>
+                  <th class="p-3">Total Amount</th>
+                  <th class="p-3">Status</th>
+                  <th class="p-3 text-center">Invoice Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminInvoicesTableBody" class="divide-y divide-purple-50">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 3: Review Approvals Queue -->
+        <div id="adminTab-reviewApproval" class="hidden space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-sm text-purple-950">Customer Reviews Moderation Queue</h4>
+              <p class="text-xs text-gray-500">Only reviews approved by you will appear live on the public storefront.</p>
+            </div>
+          </div>
+
+          <div id="adminReviewsQueue" class="space-y-3">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Tab 4: Live Customer Chat Section in Admin Portal -->
+        <div id="adminTab-liveChatSupport" class="hidden space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-sm text-purple-950">Store Live Chat & Support Messages</h4>
+              <p class="text-xs text-gray-500">Customer questions submitted via the floating chat widget appear here in real time.</p>
+            </div>
+            <button onclick="clearAdminChatHistory()" class="text-xs px-3 py-1.5 bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold rounded-xl transition">
+              <i class="fa-solid fa-trash-can mr-1"></i> Clear Chat Thread
+            </button>
+          </div>
+
+          <div class="border border-purple-200 rounded-2xl bg-purple-50/30 p-4 h-80 overflow-y-auto space-y-3 text-xs" id="adminChatLiveFeed">
+            <!-- Rendered by JS -->
+          </div>
+
+          <form onsubmit="handleAdminChatReply(event)" class="flex gap-2">
+            <input type="text" id="adminReplyInput" required placeholder="Type reply as Radha Krishna Store Owner..." class="flex-1 text-xs px-3.5 py-2.5 rounded-xl border border-purple-200 focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white">
+            <button type="submit" class="px-5 py-2.5 bg-purple-900 hover:bg-purple-950 text-amber-300 font-bold rounded-xl text-xs transition flex items-center gap-1.5 shadow">
+              <i class="fa-solid fa-paper-plane"></i> Send Reply to Customer
+            </button>
+          </form>
+        </div>
+
+        <!-- Tab 5: Inventory & Stock Management with local image file upload -->
+        <div id="adminTab-productsInventory" class="space-y-4 hidden">
+          <div class="flex justify-between items-center">
+            <h4 class="font-bold text-sm text-purple-950">Add / Update Products in Catalog</h4>
+            <button onclick="toggleAddProductForm()" class="px-3 py-1.5 bg-purple-900 text-amber-300 font-bold rounded-xl text-xs hover:bg-purple-950">
+              <i class="fa-solid fa-plus mr-1"></i> Add New Product
+            </button>
+          </div>
+
+          <!-- Add Product Form Drawer -->
+          <div id="addProductFormContainer" class="hidden bg-purple-50 p-4 rounded-2xl border border-purple-200">
+            <h5 class="font-bold text-xs text-purple-950 mb-3">Create New Product Listing</h5>
+            <form id="newProductForm" onsubmit="handleCreateProduct(event)" class="space-y-3">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[11px] font-semibold text-gray-700 mb-1">Product Title *</label>
+                  <input type="text" id="newProdName" required placeholder="e.g. Divine Flute Night Lamp" class="w-full text-xs p-2 rounded-xl border border-purple-200 bg-white">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-gray-700 mb-1">Category *</label>
+                  <select id="newProdCategory" required class="w-full text-xs p-2 rounded-xl border border-purple-200 bg-white">
+                    <!-- Populated dynamically -->
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block text-[11px] font-semibold text-gray-700 mb-1">Selling Price (₹) *</label>
+                  <input type="number" id="newProdPrice" min="1" required placeholder="e.g. 499" class="w-full text-xs p-2 rounded-xl border border-purple-200 bg-white">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-gray-700 mb-1">Original Price (₹) *</label>
+                  <input type="number" id="newProdOrigPrice" min="1" required placeholder="e.g. 899" class="w-full text-xs p-2 rounded-xl border border-purple-200 bg-white">
+                </div>
+                <div>
+                  <label class="block text-[11px] font-semibold text-gray-700 mb-1">Stock Units *</label>
+                  <input type="number" id="newProdStock" min="1" required placeholder="e.g. 25" class="w-full text-xs p-2 rounded-xl border border-purple-200 bg-white">
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-semibold text-gray-700 mb-1">Upload Product Image File *</label>
+                <div class="flex items-center gap-3">
+                  <input type="file" id="newProdImageFile" accept="image/*" onchange="handleProductImageUpload(event)" class="text-xs text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-purple-900 file:text-amber-300 hover:file:bg-purple-950 cursor-pointer">
+                  <span id="uploadFileNameDisplay" class="text-[11px] text-gray-500 truncate max-w-xs">No image selected yet</span>
+                </div>
+                <div id="imagePreviewContainer" class="hidden mt-2 flex items-center gap-2">
+                  <img id="imagePreviewThumb" src="" alt="Uploaded Preview" class="w-12 h-12 object-contain rounded-lg border border-purple-200 bg-white p-1">
+                  <span class="text-[10px] text-emerald-700 font-semibold"><i class="fa-solid fa-circle-check"></i> Image loaded successfully</span>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-semibold text-gray-700 mb-1">Product Description *</label>
+                <textarea id="newProdDesc" rows="2" required placeholder="Enter detailed specifications and highlights..." class="w-full text-xs p-2 rounded-xl border border-purple-200 bg-white"></textarea>
+              </div>
+
+              <div class="flex justify-end gap-2 pt-1">
+                <button type="button" onclick="toggleAddProductForm()" class="px-3 py-1.5 text-xs text-gray-600 hover:bg-gray-100 rounded-xl">Cancel</button>
+                <button type="submit" class="px-4 py-1.5 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-xl text-xs transition">Save Product to Store</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="overflow-x-auto border border-purple-100 rounded-2xl">
+            <table class="w-full text-xs text-left">
+              <thead class="bg-purple-100 text-purple-950 font-bold">
+                <tr>
+                  <th class="p-3">Product Name & Photo</th>
+                  <th class="p-3">Category</th>
+                  <th class="p-3">Price</th>
+                  <th class="p-3">In Stock</th>
+                  <th class="p-3 text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminProductsTableBody" class="divide-y divide-purple-50">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab: Dispatched Cancellation Emails with Happy Notes Log -->
+        <div id="adminTab-cancelledEmailsLog" class="hidden space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-sm text-purple-950">Customer Cancellation Emails Sent</h4>
+              <p class="text-xs text-gray-500">Every cancelled order automatically dispatches a heartfelt, cheerful note with blessing wishes and refund instructions.</p>
+            </div>
+          </div>
+
+          <div id="cancelledEmailsLogContainer" class="space-y-3">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Tab 6: Contact Messages -->
+        <div id="adminTab-messages" class="hidden space-y-4">
+          <h4 class="font-bold text-sm text-purple-950">Customer Inquiries & Messages</h4>
+          <div id="adminMessagesContainer" class="space-y-3">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div id="liveChatWidget" class="fixed bottom-6 right-6 z-40">
+    <button onclick="toggleLiveChat()" id="chatBubbleBtn" class="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-900 via-pink-600 to-amber-500 text-white rounded-full shadow-2xl hover:scale-105 transition duration-300 border-2 border-amber-300 peacock-glow">
+      <i class="fa-solid fa-comment-dots text-lg"></i>
+      <span class="font-semibold text-xs pr-1">Live Chat</span>
+      <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping"></span>
+    </button>
+
+    <div id="chatWindow" class="hidden absolute bottom-16 right-0 w-80 sm:w-96 bg-white rounded-3xl shadow-2xl border-2 border-purple-900 overflow-hidden flex flex-col h-[460px] animate-fade-in">
+      
+      <div class="bg-gradient-to-r from-purple-950 via-purple-900 to-pink-900 text-white p-4 flex items-center justify-between border-b border-amber-400/40">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-amber-400 text-purple-950 font-serif font-black flex items-center justify-center text-sm shadow">
+            RK
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-amber-200">Radha Krishna Assistant</h4>
+            <div class="flex items-center gap-1.5 text-[10px] text-emerald-300">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Online &bull; Jamnagar Store
+            </div>
+          </div>
+        </div>
+        <button onclick="toggleLiveChat()" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-xs text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Quick Suggestion Buttons -->
+      <div class="bg-purple-50 p-2.5 flex items-center gap-1.5 overflow-x-auto text-[11px] border-b border-purple-100">
+        <button onclick="sendQuickChatMessage('Do you deliver in Jamnagar?')" class="whitespace-nowrap px-2.5 py-1 bg-white border border-purple-200 rounded-full hover:bg-pink-50 text-purple-900 font-medium">Jamnagar Delivery?</button>
+        <button onclick="sendQuickChatMessage('Are bulk return gifts available?')" class="whitespace-nowrap px-2.5 py-1 bg-white border border-purple-200 rounded-full hover:bg-pink-50 text-purple-900 font-medium">Bulk Gifts?</button>
+        <button onclick="sendQuickChatMessage('What is the coupon code?')" class="whitespace-nowrap px-2.5 py-1 bg-white border border-purple-200 rounded-full hover:bg-pink-50 text-purple-900 font-medium">Coupons?</button>
+      </div>
+
+      <div id="chatMessagesBody" class="flex-1 p-4 overflow-y-auto space-y-3 bg-purple-50/30 text-xs">
+        <div class="flex items-start gap-2">
+          <div class="w-7 h-7 rounded-full bg-purple-900 text-amber-300 flex items-center justify-center text-[10px] font-bold shrink-0">RK</div>
+          <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-purple-100 max-w-[80%] text-gray-800 leading-relaxed">
+            ✨ <b>Radhe Radhe!</b> Welcome to Radha Krishna Novelty Store. How may we assist your gifting or shopping journey today?
+          </div>
+        </div>
+      </div>
+
+      <form onsubmit="handleSendChatMessage(event)" class="p-3 bg-white border-t border-purple-100 flex items-center gap-2">
+        <input type="text" id="liveChatInputField" placeholder="Type your message..." required class="flex-1 text-xs px-3.5 py-2.5 bg-purple-50 rounded-full border border-purple-200 focus:outline-none focus:ring-1 focus:ring-pink-500">
+        <button type="submit" class="w-9 h-9 bg-purple-900 hover:bg-purple-950 text-amber-300 rounded-full flex items-center justify-center text-xs transition shadow shrink-0">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+
+      <div class="bg-emerald-50 px-3 py-1.5 text-center border-t border-emerald-100">
+        <a href="https://wa.me/919825012345?text=Hello%20Radha%20Krishna%20Store%20team" target="_blank" class="text-[11px] text-emerald-800 font-bold hover:underline flex items-center justify-center gap-1.5">
+          <i class="fa-brands fa-whatsapp text-emerald-600 text-sm"></i> Prefer WhatsApp? Chat directly with owner
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="cancelEmailNoticeModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative border-2 border-amber-300 animate-fade-in text-xs">
+      <button onclick="closeCancelEmailModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center text-sm transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4 border-b border-purple-100 pb-3">
+        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl">
+          <i class="fa-solid fa-envelope-circle-check"></i>
+        </div>
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-pink-600 bg-pink-100 px-2 py-0.5 rounded-full">Email Dispatched Successfully</span>
+          <h4 class="font-serif font-bold text-base text-purple-950 mt-1">Cancellation Notice Sent to Customer</h4>
+        </div>
+      </div>
+
+      <div class="bg-purple-50/70 p-4 rounded-2xl border border-purple-200 space-y-2 leading-relaxed">
+        <div class="flex justify-between border-b border-purple-100 pb-1 text-[11px] text-gray-600">
+          <span><b>Recipient:</b> <span id="cancelEmailToDisplay" class="text-purple-950 font-semibold">customer@email.com</span></span>
+          <span><b>From:</b> radhakrishnanoveltystore@gmail.com</span>
+        </div>
+        <div class="text-[11px] font-bold text-purple-900">
+          Subject: ✨ Radhe Radhe! Update on Order #<span id="cancelEmailOrderIdDisplay"></span> — With Smiles from Radha Krishna Novelty Store
+        </div>
+        <div id="cancelEmailBodyContent" class="text-gray-700 whitespace-pre-line text-xs font-sans bg-white p-3 rounded-xl border border-purple-100 shadow-xs">
+          <!-- Email Body Content with Happy Note -->
+        </div>
+      </div>
+
+      <div class="mt-4 flex justify-end">
+        <button onclick="closeCancelEmailModal()" class="px-5 py-2.5 bg-gradient-to-r from-purple-900 to-pink-700 text-white font-bold rounded-xl text-xs shadow-md">
+          Done &bull; Return to Portal
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CATEGORIES = [
+      { name: "Toys and Games", icon: "fa-gamepad", img: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=500&q=80" },
+      { name: "Gift Items", icon: "fa-gift", img: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=500&q=80" },
+      { name: "School and Office Stationery", icon: "fa-pencil", img: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=500&q=80" },
+      { name: "Home Decoration", icon: "fa-house-chimney-window", img: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=80" },
+      { name: "Kitchen Accessories", icon: "fa-kitchen-set", img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=500&q=80" },
+      { name: "Beauty and Personal Care Accessories", icon: "fa-wand-magic-sparkles", img: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=500&q=80" },
+      { name: "Fashion Accessories", icon: "fa-gem", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=500&q=80" },
+      { name: "Keychains and Small Gifts", icon: "fa-key", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80" },
+      { name: "Soft Toys and Dolls", icon: "fa-heart", img: "https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=500&q=80" },
+      { name: "Birthday and Party Supplies", icon: "fa-cake-candles", img: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=500&q=80" },
+      { name: "Mobile Accessories", icon: "fa-mobile-screen-button", img: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?auto=format&fit=crop&w=500&q=80" },
+      { name: "Household Utility Products", icon: "fa-toolbox", img: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=500&q=80" },
+      { name: "Seasonal and Festival Items", icon: "fa-fire-flame-curved", img: "https://images.unsplash.com/photo-1605647540924-852290f6b0d5?auto=format&fit=crop&w=500&q=80" },
+      { name: "Return Gifts and Gift Sets", icon: "fa-boxes-packing", img: "https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=500&q=80" },
+      { name: "Trending Novelty Products", icon: "fa-fire", img: "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=500&q=80" }
+    ];
+
+    let cancellationEmailsLog = [];
+
+    // Helper to open/close customer orders modal
+    function openCustomerOrdersModal() {
+      renderCustomerOrdersList();
+      document.getElementById('customerOrdersModal').classList.remove('hidden');
+    }
+
+    function closeCustomerOrdersModal() {
+      document.getElementById('customerOrdersModal').classList.add('hidden');
+    }
+
+    function renderCustomerOrdersList() {
+      const container = document.getElementById('customerOrdersListContainer');
+      if (!container) return;
+
+      if (ordersDatabase.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-gray-500 bg-purple-50/50 rounded-2xl border border-dashed border-purple-200">
+            <i class="fa-solid fa-box-open text-4xl text-purple-300 mb-2"></i>
+            <h4 class="font-bold text-sm text-purple-950">No orders placed yet</h4>
+            <p class="text-xs text-gray-500 mt-1">Browse our store and make your first novelty purchase!</p>
+            <button onclick="closeCustomerOrdersModal(); navigateTo('catalog');" class="mt-4 px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-800 text-white rounded-xl text-xs font-bold shadow">
+              Shop Novelty Catalog
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = ordersDatabase.map(ord => `
+        <div class="p-4 rounded-2xl border ${ord.status === 'Cancelled' ? 'bg-rose-50/40 border-rose-200' : 'bg-white border-purple-200 shadow-sm'} space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-purple-100 pb-2.5">
+            <div class="flex items-center gap-2">
+              <span class="font-mono font-bold text-sm text-purple-950">${ord.orderId}</span>
+              <span class="text-xs text-gray-400 font-mono">(${ord.invoiceNumber})</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] font-semibold text-gray-500">${ord.date}</span>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                ord.status === 'Cancelled' ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'
+              }">${ord.status}</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            ${ord.items.map(it => `
+              <div class="flex items-center justify-between text-xs text-gray-700">
+                <span class="font-medium text-purple-900">• ${it.name} <span class="text-gray-400">× ${it.qty}</span></span>
+                <span class="font-semibold">₹${(it.price * it.qty).toFixed(2)}</span>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-purple-100 text-xs">
+            <div>
+              <span class="text-gray-500">Total Paid:</span>
+              <span class="font-black text-pink-700 ml-1 text-sm">₹${ord.grandTotal.toFixed(2)}</span>
+              <span class="text-[10px] text-gray-400 ml-1">(${ord.paymentMethod})</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="adminViewInvoice('${ord.orderId}'); closeCustomerOrdersModal();" class="px-3 py-1.5 bg-purple-900 text-amber-300 font-bold rounded-xl text-xs hover:bg-purple-950 transition flex items-center gap-1 shadow-sm">
+                <i class="fa-solid fa-file-invoice"></i> View Bill
+              </button>
+              <button onclick="adminDownloadInvoice('${ord.orderId}')" class="px-3 py-1.5 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-xl text-xs transition flex items-center gap-1 shadow-sm">
+                <i class="fa-solid fa-download"></i> PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function closeCancelEmailModal() {
+      document.getElementById('cancelEmailNoticeModal').classList.add('hidden');
+    }
+
+    // Verified Indian Novelty Products with accurate images and verified ₹ prices
+    let productsDatabase = [
+      {
+        id: "prod-1",
+        sku: "RK-TOY-01",
+        name: "Remote Control Stunt Twister Car with 360 Spin",
+        category: "Toys and Games",
+        price: 899,
+        originalPrice: 1499,
+        stock: 35,
+        rating: 4.9,
+        reviewsCount: 38,
+        costPrice: 520,
+        isBestseller: true,
+        image: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=600&q=80",
+        description: "Rechargeable high-speed 4WD stunt car with flashing LED lights and acrobatic rollover capabilities. Loved by children and toddlers."
+      },
+      {
+        id: "prod-2",
+        sku: "RK-GFT-02",
+        name: "Aura Crystal Galaxy Lamp with Wooden Stand",
+        category: "Gift Items",
+        price: 649,
+        originalPrice: 1199,
+        stock: 28,
+        rating: 4.8,
+        reviewsCount: 42,
+        costPrice: 380,
+        isBestseller: true,
+        image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80",
+        description: "3D laser engraved celestial crystal glass ball featuring warm soothing ambient USB LED illumination. Excellent gifting item."
+      },
+      {
+        id: "prod-3",
+        sku: "RK-STN-03",
+        name: "Aesthetic Pastel Gel Pens & Journal Gift Set",
+        category: "School and Office Stationery",
+        price: 349,
+        originalPrice: 599,
+        stock: 45,
+        rating: 4.7,
+        reviewsCount: 29,
+        costPrice: 190,
+        isBestseller: false,
+        image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=600&q=80",
+        description: "Set of 6 ultra-smooth 0.5mm quick-dry ink pens paired with a hardcover grid notebook and cute sticky notes."
+      },
+      {
+        id: "prod-4",
+        sku: "RK-HOM-04",
+        name: "Divine Radha Krishna Brass Flute Idol (Golden)",
+        category: "Home Decoration",
+        price: 1299,
+        originalPrice: 2200,
+        stock: 18,
+        rating: 5.0,
+        reviewsCount: 56,
+        costPrice: 800,
+        isBestseller: true,
+        image: "https://images.unsplash.com/photo-1567591414240-e991f8682ee5?auto=format&fit=crop&w=600&q=80",
+        description: "Pure handcrafted brass statue portraying Radha & Krishna with peacock feather details and lustrous antique gold finish."
+      },
+      {
+        id: "prod-5",
+        sku: "RK-KIT-05",
+        name: "Multi-Functional 9-in-1 Vegetable Cutter & Slicer",
+        category: "Kitchen Accessories",
+        price: 499,
+        originalPrice: 899,
+        stock: 30,
+        rating: 4.6,
+        reviewsCount: 21,
+        costPrice: 280,
+        isBestseller: false,
+        image: "https://images.unsplash.com/photo-1584990347449-399c51a79895?auto=format&fit=crop&w=600&q=80",
+        description: "Ergonomic kitchen chopper with stainless steel interchange blades and rotating drain basket. BPA Free."
+      },
+      {
+        id: "prod-6",
+        sku: "RK-BEA-06",
+        name: "Rechargeable LED Travel Makeup Mirror with Touch Dimmer",
+        category: "Beauty and Personal Care Accessories",
+        price: 599,
+        originalPrice: 999,
+        stock: 22,
+        rating: 4.7,
+        reviewsCount: 19,
+        costPrice: 340,
+        isBestseller: false,
+        image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80",
+        description: "Tri-fold vanity mirror with soft daylight LEDs, 3x magnifying mirror, and USB rechargeable battery."
+      },
+      {
+        id: "prod-7",
+        sku: "RK-FSH-07",
+        name: "Ethnic Kundan Choker Necklace & Earring Set",
+        category: "Fashion Accessories",
+        price: 749,
+        originalPrice: 1499,
+        stock: 14,
+        rating: 4.9,
+        reviewsCount: 31,
+        costPrice: 420,
+        isBestseller: true,
+        image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80",
+        description: "Traditional handcrafted pearls and royal maroon stone jewelry set suitable for weddings, Navratri and festivals."
+      },
+      {
+        id: "prod-8",
+        sku: "RK-KEY-08",
+        name: "Aesthetic Silicone Astronaut & Bear Keychains (Pack of 3)",
+        category: "Keychains and Small Gifts",
+        price: 249,
+        originalPrice: 499,
+        stock: 60,
+        rating: 4.8,
+        reviewsCount: 52,
+        costPrice: 110,
+        isBestseller: true,
+        image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
+        description: "Heavy-duty rustproof alloy ring with designer silicone straps and 3D figure pendants for bag and bike keys."
+      },
+      {
+        id: "prod-9",
+        sku: "RK-SFT-09",
+        name: "Super Soft Fluffy Giant Teddy Bear (45cm Pink)",
+        category: "Soft Toys and Dolls",
+        price: 799,
+        originalPrice: 1399,
+        stock: 25,
+        rating: 4.9,
+        reviewsCount: 40,
+        costPrice: 460,
+        isBestseller: true,
+        image: "https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=600&q=80",
+        description: "Non-toxic hypoallergenic plush velvet stuffed bear with embroidered paws. Perfect surprise birthday gift."
+      },
+      {
+        id: "prod-10",
+        sku: "RK-PRT-10",
+        name: "Gold & Purple Confetti Birthday Party Decor Kit (65 Pcs)",
+        category: "Birthday and Party Supplies",
+        price: 499,
+        originalPrice: 899,
+        stock: 35,
+        rating: 4.7,
+        reviewsCount: 26,
+        costPrice: 280,
+        isBestseller: false,
+        image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=600&q=80",
+        description: "Complete birthday party decoration kit containing metallic banners, foil curtains, balloons, and cake toppers."
+      },
+      {
+        id: "prod-11",
+        sku: "RK-MOB-11",
+        name: "Foldable Metal Desktop Mobile & Tablet Stand Holder",
+        category: "Mobile Accessories",
+        price: 299,
+        originalPrice: 599,
+        stock: 50,
+        rating: 4.8,
+        reviewsCount: 34,
+        costPrice: 150,
+        isBestseller: false,
+        image: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?auto=format&fit=crop&w=600&q=80",
+        description: "Heavy-duty aluminum alloy angle-adjustable desk stand with anti-skid silicone pads for all smartphones."
+      },
+      {
+        id: "prod-12",
+        sku: "RK-UTL-12",
+        name: "Smart Motion Sensor LED Night Light (Rechargeable)",
+        category: "Household Utility Products",
+        price: 399,
+        originalPrice: 799,
+        stock: 40,
+        rating: 4.7,
+        reviewsCount: 30,
+        costPrice: 210,
+        isBestseller: true,
+        image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80",
+        description: "Magnetic wireless sensor wardrobe and stairway light with auto motion detection and USB Type-C charging."
+      }
+    ];
+
+    /* Strict rule: Automation replies ONLY 1 time initially. Subsequent messages wait for the owner */
+    let hasAutomatedReplyFired = false;
+
+    let liveChatHistory = [
+      {
+        sender: "customer",
+        text: "Radhe Radhe! Do you provide bulk discounts for birthday return gifts?",
+        time: "10:15 AM"
+      },
+      {
+        sender: "store",
+        text: "Radhe Radhe! Yes, we have special wholesale bundles for party return gifts. Use coupon SPECIAL999 for orders above ₹999 or call us directly at +91 98250 12345.",
+        time: "10:16 AM"
+      }
+    ];
+
+    function renderAdminChatFeed() {
+      const container = document.getElementById('adminChatLiveFeed');
+      if (!container) return;
+
+      if (liveChatHistory.length === 0) {
+        container.innerHTML = `<div class="text-center py-10 text-gray-400">No active customer chat messages yet.</div>`;
+        return;
+      }
+
+      container.innerHTML = liveChatHistory.map(m => `
+        <div class="flex ${m.sender === 'store' ? 'justify-end' : 'justify-start'}">
+          <div class="max-w-[75%] p-3 rounded-2xl ${
+            m.sender === 'store' 
+              ? 'bg-purple-900 text-amber-200 rounded-tr-none shadow-sm' 
+              : 'bg-white border border-purple-200 text-gray-800 rounded-tl-none shadow-xs'
+          }">
+            <div class="text-[10px] font-bold ${m.sender === 'store' ? 'text-pink-300' : 'text-purple-900'} mb-0.5 flex justify-between gap-3">
+              <span>${m.sender === 'store' ? 'Store Owner (You)' : 'Customer'}</span>
+              <span class="text-gray-400 font-normal">${m.time}</span>
+            </div>
+            <p class="leading-relaxed">${m.text}</p>
+          </div>
+        </div>
+      `).join('');
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function handleAdminChatReply(e) {
+      e.preventDefault();
+      const input = document.getElementById('adminReplyInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+      liveChatHistory.push({
+        sender: "store",
+        text: text,
+        time: timeStr
+      });
+
+      input.value = '';
+      renderAdminChatFeed();
+
+      // Synchronize with front-end live chat widget and clean any "Wait For Owners Reply" elements
+      const chatBody = document.getElementById('chatMessagesBody');
+      if (chatBody) {
+        // Remove all pending "Wait For Owners Reply" notifications upon reply
+        const pendingNotifs = chatBody.querySelectorAll('.wait-owner-msg');
+        pendingNotifs.forEach(el => el.remove());
+
+        const botBubble = document.createElement('div');
+        botBubble.className = "flex items-start gap-2";
+        botBubble.innerHTML = `
+          <div class="w-7 h-7 rounded-full bg-purple-900 text-amber-300 flex items-center justify-center text-[10px] font-bold shrink-0">RK</div>
+          <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-purple-100 max-w-[80%] text-gray-800 leading-relaxed">
+            <span class="text-[10px] font-bold text-pink-600 block mb-0.5">Store Owner</span>
+            ${text}
+          </div>
+        `;
+        chatBody.appendChild(botBubble);
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+
+      showToast('Reply dispatched to customer live chat!');
+    }
+
+    function clearAdminChatHistory() {
+      liveChatHistory = [];
+      renderAdminChatFeed();
+      showToast('Chat history cleared.');
+    }
+
+    let customerReviews = [
+      {
+        id: "rev-1",
+        author: "Darshil S. (Jamnagar)",
+        rating: 5,
+        title: "Superb Quality Radha Krishna Brass Idol!",
+        comment: "Ordered the brass idol for my parents' mandir. The detailing is pure excellence and packing had extra bubble wrap.",
+        date: "14 Oct 2026",
+        isApproved: true,
+        verified: true
+      },
+      {
+        id: "rev-2",
+        author: "Meera Trivedi",
+        rating: 5,
+        title: "Perfect return gift set for 8th birthday",
+        comment: "All kids loved the rainbow scratch art pads! Prices are better than any local retail shop in Gujarat.",
+        date: "09 Oct 2026",
+        isApproved: true,
+        verified: true
+      },
+      {
+        id: "rev-3",
+        author: "Vikram Gohil",
+        rating: 4,
+        title: "Fast dispatch & very sturdy stunt car",
+        comment: "My son plays with the remote control car daily. Good battery backup and instant delivery in Jamnagar.",
+        date: "01 Oct 2026",
+        isApproved: true,
+        verified: true
+      },
+      {
+        id: "rev-4",
+        author: "Kavita Rao",
+        rating: 5,
+        title: "Galaxy crystal lamp looks magical at night",
+        comment: "Gave this to my best friend for housewarming. Beautiful wooden base and warm light.",
+        date: "17 Oct 2026",
+        isApproved: false, // In queue for owner review
+        verified: true
+      }
+    ];
+
+    let ordersDatabase = [
+      {
+        orderId: "RK-ORD-101",
+        invoiceNumber: "INV-1001",
+        date: "2026-10-18 14:30",
+        customer: {
+          name: "Amit Solanki",
+          phone: "9825100011",
+          email: "amit.solanki@gmail.com",
+          address: "202 Shree Ram Apartments, Patel Colony, Jamnagar - 361008",
+          city: "Jamnagar",
+          state: "Gujarat",
+          pin: "361008"
+        },
+        items: [
+          { id: "prod-1", sku: "RK-TOY-01", name: "Remote Control Stunt Twister Car", price: 899, cost: 520, qty: 1 },
+          { id: "prod-8", sku: "RK-KEY-08", name: "Aesthetic Silicone Astronaut Keychains", price: 249, cost: 110, qty: 2 }
+        ],
+        subtotal: 1397,
+        discount: 139,
+        tax: 62.90,
+        shipping: 0,
+        grandTotal: 1258,
+        costTotal: 740,
+        profit: 518,
+        paymentMethod: "Online UPI / Razorpay",
+        status: "Confirmed & Invoiced"
+      }
+    ];
+
+    let contactSubmissions = [
+      {
+        name: "Pooja Mehta",
+        phone: "9879012345",
+        email: "pooja@gmail.com",
+        subject: "Bulk / Return Gifts Order",
+        message: "Need 45 pieces of stationery sets for a school event next Saturday. Any extra bulk discount?",
+        date: "18 Oct 2026"
+      }
+    ];
+
+    // Cart state
+    let cart = [];
+    let appliedCoupon = null; // { code: 'FIRST10' or 'SPECIAL999', type: 'percentage'|'flat', value: 10 or 150 }
+    let currentSelectedProduct = null;
+    let modalSelectedQty = 1;
+    let currentInvoiceData = null; 
+    let pendingOrderPayload = null; // Stored during Razorpay modal step
+
+    function renderCategories() {
+      const container = document.getElementById('categoryGrid');
+      container.innerHTML = CATEGORIES.map((cat, idx) => `
+        <div onclick="filterByCategory('${cat.name}')" class="group cursor-pointer bg-white rounded-2xl p-3 border border-purple-100 hover:border-pink-500 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center flex flex-col justify-between">
+          <div class="h-28 rounded-xl overflow-hidden mb-2 relative bg-purple-50">
+            <img src="${cat.img}" alt="${cat.name}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            <div class="absolute inset-0 bg-purple-900/10 group-hover:bg-transparent transition"></div>
+          </div>
+          <div>
+            <h4 class="font-semibold text-xs text-purple-950 group-hover:text-pink-600 transition leading-snug">${cat.name}</h4>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Quick Filter Chips on Catalog
+    function renderCategoryChips(activeCat = "All") {
+      const container = document.getElementById('quickFilterChips');
+      const allOption = `
+        <button onclick="filterByCategory('All')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${activeCat === 'All' ? 'bg-purple-900 text-amber-300 shadow' : 'bg-white text-gray-700 border border-purple-200 hover:bg-purple-50'}">
+          All (${productsDatabase.length})
+        </button>
+      `;
+      const chips = CATEGORIES.map(c => `
+        <button onclick="filterByCategory('${c.name}')" class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${activeCat === c.name ? 'bg-purple-900 text-amber-300 shadow' : 'bg-white text-gray-700 border border-purple-200 hover:bg-purple-50'}">
+          ${c.name}
+        </button>
+      `).join('');
+      container.innerHTML = allOption + chips;
+    }
+
+    // Render Products Grid
+    let currentProductsList = [...productsDatabase];
+
+    function renderProductGrid(list = currentProductsList) {
+      const grid = document.getElementById('productGrid');
+      const emptyBox = document.getElementById('noProductsFound');
+
+      if (!list || list.length === 0) {
+        grid.innerHTML = '';
+        emptyBox.classList.remove('hidden');
+        return;
+      }
+
+      emptyBox.classList.add('hidden');
+      grid.innerHTML = list.map(item => {
+        const discountPct = Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100);
+        return `
+          <div class="bg-white rounded-3xl overflow-hidden border border-purple-100 shadow-sm hover:shadow-2xl transition duration-300 flex flex-col justify-between group">
+            
+            <div class="relative bg-purple-50/40 p-4 h-56 flex items-center justify-center overflow-hidden cursor-pointer" onclick="openProductModal('${item.id}')">
+              <img src="${item.image}" alt="${item.name}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition duration-500">
+              
+              <div class="absolute top-3 left-3 flex flex-col gap-1">
+                ${item.isBestseller ? '<span class="bg-amber-400 text-purple-950 text-[10px] font-black uppercase px-2 py-0.5 rounded-full shadow">Bestseller</span>' : ''}
+                <span class="bg-pink-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">${discountPct}% OFF</span>
+              </div>
+
+              <div class="absolute bottom-2 right-3 text-[10px] text-gray-500 font-mono bg-white/90 px-1.5 py-0.5 rounded">
+                ${item.sku}
+              </div>
+            </div>
+
+            <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <span class="text-[10px] uppercase font-bold text-pink-600 tracking-wider block">${item.category}</span>
+                <h3 onclick="openProductModal('${item.id}')" class="font-bold text-sm text-purple-950 group-hover:text-pink-600 cursor-pointer line-clamp-2 mt-1 leading-snug">
+                  ${item.name}
+                </h3>
+
+                <div class="flex items-center gap-1.5 mt-2">
+                  <div class="flex text-amber-400 text-xs">
+                    ${getStarHtml(item.rating)}
+                  </div>
+                  <span class="text-[11px] text-gray-500 font-medium">(${item.reviewsCount})</span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-purple-50">
+                <div class="flex items-baseline gap-2 mb-3">
+                  <span class="text-xl font-black text-purple-950">₹${item.price}</span>
+                  <span class="text-xs text-gray-400 line-through">₹${item.originalPrice}</span>
+                  <span class="text-[10px] text-emerald-600 font-semibold ml-auto">Stock: ${item.stock}</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <button onclick="addToCart('${item.id}')" class="py-2.5 px-3 bg-purple-100 hover:bg-purple-200 text-purple-900 font-bold rounded-xl text-xs transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-cart-plus"></i> Add
+                  </button>
+                  <button onclick="buyNowDirect('${item.id}')" class="py-2.5 px-3 bg-gradient-to-r from-pink-600 to-purple-800 hover:from-pink-700 hover:to-purple-900 text-white font-bold rounded-xl text-xs transition shadow-sm flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-bolt"></i> Buy
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        `;
+      }).join('');
+    }
+
+    function getStarHtml(rating) {
+      let stars = '';
+      for (let i = 1; i <= 5; i++) {
+        if (i <= Math.floor(rating)) {
+          stars += '<i class="fa-solid fa-star"></i>';
+        } else if (i - rating <= 0.5) {
+          stars += '<i class="fa-solid fa-star-half-stroke"></i>';
+        } else {
+          stars += '<i class="fa-regular fa-star"></i>';
+        }
+      }
+      return stars;
+    }
+
+    function filterByCategory(catName) {
+      renderCategoryChips(catName);
+      const title = document.getElementById('catalogTitle');
+      const sub = document.getElementById('catalogSubtext');
+
+      if (catName === 'All') {
+        currentProductsList = [...productsDatabase];
+        title.innerText = "All Novelty Products";
+        sub.innerText = "Showing complete verified catalog in Indian Rupees (₹).";
+      } else {
+        currentProductsList = productsDatabase.filter(p => p.category === catName);
+        title.innerText = catName;
+        sub.innerText = `Found ${currentProductsList.length} products in ${catName}`;
+      }
+      renderProductGrid(currentProductsList);
+      document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function filterBySpecial(type) {
+      if (type === 'bestseller') {
+        currentProductsList = productsDatabase.filter(p => p.isBestseller);
+        document.getElementById('catalogTitle').innerText = "🔥 Best Selling Products";
+        document.getElementById('catalogSubtext').innerText = "Top customer-favorite novelty gifts and toys.";
+        renderCategoryChips("All");
+        renderProductGrid(currentProductsList);
+        document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function handleSort(criteria) {
+      let sorted = [...currentProductsList];
+      if (criteria === 'price-low') {
+        sorted.sort((a, b) => a.price - b.price);
+      } else if (criteria === 'price-high') {
+        sorted.sort((a, b) => b.price - a.price);
+      } else if (criteria === 'rating') {
+        sorted.sort((a, b) => b.rating - a.rating);
+      } else {
+        sorted = [...productsDatabase];
+      }
+      renderProductGrid(sorted);
+    }
+
+    function resetFilters() {
+      currentProductsList = [...productsDatabase];
+      document.getElementById('sortSelect').value = 'featured';
+      document.getElementById('headerSearchInput').value = '';
+      document.getElementById('catalogTitle').innerText = "All Novelty Products";
+      document.getElementById('catalogSubtext').innerText = "Showing verified products with authentic prices in Indian Rupees (₹).";
+      renderCategoryChips("All");
+      renderProductGrid(currentProductsList);
+    }
+
+    function handleSearch(query) {
+      const q = query.trim().toLowerCase();
+      const suggestionsBox = document.getElementById('searchSuggestions');
+      const clearBtn = document.getElementById('clearSearchBtn');
+
+      if (clearBtn) clearBtn.classList.toggle('hidden', q.length === 0);
+
+      if (q.length === 0) {
+        suggestionsBox.classList.add('hidden');
+        renderProductGrid(productsDatabase);
+        return;
+      }
+
+      const matches = productsDatabase.filter(p => 
+        p.name.toLowerCase().includes(q) || 
+        p.category.toLowerCase().includes(q) ||
+        p.sku.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q)
+      );
+
+      if (matches.length > 0) {
+        suggestionsBox.classList.remove('hidden');
+        suggestionsBox.innerHTML = matches.slice(0, 5).map(m => `
+          <div onclick="selectSearchResult('${m.id}')" class="p-3 hover:bg-purple-50 cursor-pointer flex items-center gap-3">
+            <img src="${m.image}" alt="${m.name}" class="w-10 h-10 object-contain rounded bg-purple-50">
+            <div class="flex-1">
+              <h5 class="text-xs font-bold text-purple-950">${m.name}</h5>
+              <div class="text-[10px] text-pink-600 font-medium">₹${m.price} &bull; ${m.category}</div>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        suggestionsBox.classList.remove('hidden');
+        suggestionsBox.innerHTML = `<div class="p-3 text-xs text-gray-500 text-center">No products found matching "${query}"</div>`;
+      }
+
+      currentProductsList = matches;
+      renderProductGrid(currentProductsList);
+    }
+
+    function selectSearchResult(id) {
+      document.getElementById('searchSuggestions').classList.add('hidden');
+      openProductModal(id);
+    }
+
+    function clearSearch() {
+      document.getElementById('headerSearchInput').value = '';
+      handleSearch('');
+    }
+
+    function openProductModal(id) {
+      const prod = productsDatabase.find(p => p.id === id);
+      if (!prod) return;
+
+      currentSelectedProduct = prod;
+      modalSelectedQty = 1;
+
+      document.getElementById('modalProductImg').src = prod.image;
+      document.getElementById('modalCategory').innerText = prod.category;
+      document.getElementById('modalSku').innerText = `SKU: ${prod.sku}`;
+      document.getElementById('modalTitle').innerText = prod.name;
+      document.getElementById('modalPrice').innerText = `₹${prod.price}`;
+      document.getElementById('modalOriginalPrice').innerText = `₹${prod.originalPrice}`;
+      
+      const pct = Math.round(((prod.originalPrice - prod.price) / prod.originalPrice) * 100);
+      document.getElementById('modalDiscountBadge').innerText = `${pct}% OFF`;
+
+      document.getElementById('modalStars').innerHTML = getStarHtml(prod.rating);
+      document.getElementById('modalRatingText').innerText = `${prod.rating} (${prod.reviewsCount} customer reviews)`;
+      document.getElementById('modalDescription').innerText = prod.description;
+      document.getElementById('modalQtyDisplay').innerText = modalSelectedQty;
+
+      document.getElementById('productDetailModal').classList.remove('hidden');
+    }
+
+    function closeProductModal() {
+      document.getElementById('productDetailModal').classList.add('hidden');
+    }
+
+    function adjustModalQty(delta) {
+      modalSelectedQty = Math.max(1, modalSelectedQty + delta);
+      document.getElementById('modalQtyDisplay').innerText = modalSelectedQty;
+    }
+
+    function addModalItemToCart() {
+      if (!currentSelectedProduct) return;
+      addToCart(currentSelectedProduct.id, modalSelectedQty);
+      closeProductModal();
+    }
+
+    function buyModalItemNow() {
+      if (!currentSelectedProduct) return;
+      addToCart(currentSelectedProduct.id, modalSelectedQty);
+      closeProductModal();
+      openCheckoutModal();
+    }
+
+    function buyNowDirect(id) {
+      addToCart(id, 1);
+      openCheckoutModal();
+    }
+
+    function addToCart(productId, qty = 1) {
+      const prod = productsDatabase.find(p => p.id === productId);
+      if (!prod) return;
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({
+          id: prod.id,
+          sku: prod.sku,
+          name: prod.name,
+          price: prod.price,
+          costPrice: prod.costPrice || Math.round(prod.price * 0.65),
+          image: prod.image,
+          category: prod.category,
+          qty: qty
+        });
+      }
+
+      updateCartUI();
+      showToast(`Added "${prod.name.substring(0, 24)}..." to Cart!`);
+    }
+
+    function updateCartQty(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.id !== productId);
+      }
+      updateCartUI();
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(i => i.id !== productId);
+      updateCartUI();
+    }
+
+    function calculateCartTotals() {
+      const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      let discount = 0;
+      
+      // Coupons validation
+      if (appliedCoupon) {
+        if (appliedCoupon.code === 'FIRST10') {
+          // 10% discount on first order
+          discount = Math.round(subtotal * 0.10);
+        } else if (appliedCoupon.code === 'SPECIAL999') {
+          // Flat ₹150 discount for orders above ₹999
+          if (subtotal >= 999) {
+            discount = 150;
+          } else {
+            // Under qualification threshold
+            discount = 0;
+          }
+        }
+      }
+
+      const shipping = (subtotal === 0 || subtotal >= 499) ? 0 : 50;
+      const taxable = Math.max(0, subtotal - discount);
+      const tax = Math.round(taxable * 0.05); // 5% GST
+      const grandTotal = Math.max(0, taxable + shipping);
+
+      return { subtotal, discount, shipping, tax, grandTotal };
+    }
+
+    function updateCartUI() {
+      const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
+      document.getElementById('cartCountBadge').innerText = totalCount;
+      document.getElementById('cartHeaderBadge').innerText = `${totalCount} Items`;
+
+      const container = document.getElementById('cartItemsContainer');
+      const checkoutBtn = document.getElementById('cartCheckoutBtn');
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-gray-500">
+            <i class="fa-solid fa-basket-shopping text-4xl text-purple-200 mb-2"></i>
+            <p class="text-xs">Your shopping cart is currently empty.</p>
+            <button onclick="closeCartModal(); navigateTo('catalog');" class="mt-4 px-4 py-2 bg-pink-600 text-white text-xs font-semibold rounded-xl">
+              Explore Products
+            </button>
+          </div>
+        `;
+        if (checkoutBtn) checkoutBtn.disabled = true;
+      } else {
+        container.innerHTML = cart.map(item => `
+          <div class="flex items-center gap-3 p-3 bg-purple-50/60 rounded-2xl border border-purple-100">
+            <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-contain rounded-xl bg-white p-1">
+            <div class="flex-1">
+              <h5 class="text-xs font-bold text-purple-950 line-clamp-1">${item.name}</h5>
+              <div class="text-xs text-pink-600 font-black">₹${item.price}</div>
+              <div class="flex items-center gap-2 mt-1">
+                <button onclick="updateCartQty('${item.id}', -1)" class="w-5 h-5 rounded bg-white border border-purple-200 text-purple-900 flex items-center justify-center text-xs">-</button>
+                <span class="text-xs font-bold text-purple-950">${item.qty}</span>
+                <button onclick="updateCartQty('${item.id}', 1)" class="w-5 h-5 rounded bg-white border border-purple-200 text-purple-900 flex items-center justify-center text-xs">+</button>
+                <button onclick="removeFromCart('${item.id}')" class="text-rose-500 text-xs ml-3 hover:text-rose-700"><i class="fa-solid fa-trash-can"></i></button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        if (checkoutBtn) checkoutBtn.disabled = false;
+      }
+
+      const { subtotal, discount, shipping, tax, grandTotal } = calculateCartTotals();
+      document.getElementById('cartSubtotalText').innerText = `₹${subtotal}`;
+      document.getElementById('cartDiscountText').innerText = `- ₹${discount}`;
+      document.getElementById('cartShippingText').innerText = shipping === 0 ? 'FREE' : `₹${shipping}`;
+      document.getElementById('cartTaxText').innerText = `₹${tax}`;
+      document.getElementById('cartTotalText').innerText = `₹${grandTotal}`;
+      document.getElementById('checkoutModalTotal').innerText = `₹${grandTotal}`;
+    }
+
+    function quickApplyCoupon(code) {
+      document.getElementById('couponCodeInput').value = code;
+      applyCoupon();
+    }
+
+    function quickApplyCheckoutCoupon(code) {
+      const input = document.getElementById('checkoutCouponInput');
+      if (input) input.value = code;
+      applyCheckoutCoupon();
+    }
+
+    function applyCheckoutCoupon() {
+      const code = document.getElementById('checkoutCouponInput').value.trim().toUpperCase();
+      const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+      if (code === 'FIRST10') {
+        appliedCoupon = { code: 'FIRST10', type: 'percentage', value: 10 };
+        syncCouponUI();
+        showToast('First Order 10% Discount applied successfully!');
+      } else if (code === 'SPECIAL999') {
+        if (subtotal < 999) {
+          showToast('Coupon "SPECIAL999" requires minimum order value of ₹999.', 'error');
+          return;
+        }
+        appliedCoupon = { code: 'SPECIAL999', type: 'flat', value: 150 };
+        syncCouponUI();
+        showToast('Special ₹150 Discount for orders above ₹999 applied!');
+      } else {
+        showToast('Invalid Coupon. Try FIRST10 (10% off) or SPECIAL999 (₹150 off on ₹999+)', 'error');
+      }
+    }
+
+    function removeCheckoutCoupon() {
+      removeCoupon();
+    }
+
+    function syncCouponUI() {
+      const cartBadge = document.getElementById('couponAppliedBadge');
+      const cartAppliedName = document.getElementById('appliedCouponName');
+      const checkoutBadge = document.getElementById('checkoutCouponAppliedBadge');
+      const checkoutAppliedName = document.getElementById('checkoutAppliedCouponName');
+      const cartInput = document.getElementById('couponCodeInput');
+      const checkoutInput = document.getElementById('checkoutCouponInput');
+
+      if (appliedCoupon) {
+        const text = appliedCoupon.code === 'FIRST10' ? 'FIRST10 (10% Off)' : 'SPECIAL999 (₹150 Off)';
+        if (cartBadge) cartBadge.classList.remove('hidden');
+        if (cartAppliedName) cartAppliedName.innerText = text;
+        if (checkoutBadge) checkoutBadge.classList.remove('hidden');
+        if (checkoutAppliedName) checkoutAppliedName.innerText = text;
+        if (cartInput) cartInput.value = appliedCoupon.code;
+        if (checkoutInput) checkoutInput.value = appliedCoupon.code;
+      } else {
+        if (cartBadge) cartBadge.classList.add('hidden');
+        if (checkoutBadge) checkoutBadge.classList.add('hidden');
+        if (cartInput) cartInput.value = '';
+        if (checkoutInput) checkoutInput.value = '';
+      }
+      updateCartUI();
+    }
+
+    function applyCoupon() {
+      const code = document.getElementById('couponCodeInput').value.trim().toUpperCase();
+      const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+      if (code === 'FIRST10') {
+        appliedCoupon = { code: 'FIRST10', type: 'percentage', value: 10 };
+        syncCouponUI();
+        showToast('First Order 10% Discount applied successfully!');
+      } else if (code === 'SPECIAL999') {
+        if (subtotal < 999) {
+          showToast('Coupon "SPECIAL999" requires minimum order value of ₹999.', 'error');
+          return;
+        }
+        appliedCoupon = { code: 'SPECIAL999', type: 'flat', value: 150 };
+        syncCouponUI();
+        showToast('Special ₹150 Discount for orders above ₹999 applied!');
+      } else {
+        showToast('Invalid Coupon. Try FIRST10 (10% off) or SPECIAL999 (₹150 off on ₹999+)', 'error');
+      }
+    }
+
+    function removeCoupon() {
+      appliedCoupon = null;
+      syncCouponUI();
+      showToast('Coupon removed.');
+    }
+
+    function openCartModal() {
+      document.getElementById('cartModal').classList.remove('hidden');
+    }
+
+    function closeCartModal() {
+      document.getElementById('cartModal').classList.add('hidden');
+    }
+
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        showToast('Please add items to your cart first!', 'error');
+        return;
+      }
+      closeCartModal();
+      document.getElementById('checkoutModal').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkoutModal').classList.add('hidden');
+    }
+
+    function processOrderPlacement(event) {
+      event.preventDefault();
+
+      if (cart.length === 0) {
+        showToast('Your cart is empty!', 'error');
+        return;
+      }
+
+      const customer = {
+        name: document.getElementById('custName').value.trim(),
+        phone: document.getElementById('custPhone').value.trim(),
+        email: document.getElementById('custEmail').value.trim(),
+        address: document.getElementById('custAddress').value.trim(),
+        pin: document.getElementById('custPin').value.trim(),
+        city: document.getElementById('custCity').value.trim(),
+        state: document.getElementById('custState').value.trim()
+      };
+
+      const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+      const { subtotal, discount, shipping, tax, grandTotal } = calculateCartTotals();
+
+      const costTotal = cart.reduce((acc, item) => acc + (item.costPrice * item.qty), 0);
+      const grossProfit = Math.max(0, grandTotal - costTotal);
+
+      const uniqueOrderId = `RK-ORD-${Math.floor(1000 + Math.random() * 9000)}`;
+      const uniqueInvoiceNo = `INV-${1000 + ordersDatabase.length + 1}`;
+      const now = new Date();
+      const dateFormatted = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+      const orderDraft = {
+        orderId: uniqueOrderId,
+        invoiceNumber: uniqueInvoiceNo,
+        date: dateFormatted,
+        customer: customer,
+        items: [...cart],
+        subtotal: subtotal,
+        discount: discount,
+        tax: tax,
+        shipping: shipping,
+        grandTotal: grandTotal,
+        costTotal: costTotal,
+        profit: grossProfit,
+        paymentMethod: paymentMethod,
+        status: "Confirmed & Invoiced"
+      };
+
+      // If Razorpay gateway is selected, launch secure simulation dialog
+      if (paymentMethod === "Online UPI / Razorpay") {
+        pendingOrderPayload = orderDraft;
+        document.getElementById('gatewayPayableAmount').innerText = `₹${grandTotal}`;
+        document.getElementById('razorpayModal').classList.remove('hidden');
+        return;
+      }
+
+      // Cash On Delivery Direct Placement
+      completeOrderFinalization(orderDraft);
+    }
+
+    function finalizeOnlinePayment(isSuccess) {
+      document.getElementById('razorpayModal').classList.add('hidden');
+      if (isSuccess && pendingOrderPayload) {
+        completeOrderFinalization(pendingOrderPayload);
+        pendingOrderPayload = null;
+      } else {
+        pendingOrderPayload = null;
+        showToast('Online Payment was not completed. Order not placed.', 'error');
+      }
+    }
+
+    function completeOrderFinalization(orderObj) {
+      ordersDatabase.unshift(orderObj);
+
+      currentInvoiceData = orderObj;
+      cart = [];
+      appliedCoupon = null;
+      updateCartUI();
+
+      closeCheckoutModal();
+      populateInvoiceModal(orderObj);
+      document.getElementById('orderSuccessModal').classList.remove('hidden');
+      refreshAdminMetrics();
+
+      // Trigger compulsory instant notification to radhakrishnanoveltystore@gmail.com
+      dispatchOrderNotificationToStoreEmail(orderObj);
+    }
+
+    function dispatchOrderNotificationToStoreEmail(order) {
+      const emailNotice = document.getElementById('emailBroadcastNotice');
+      const detailsText = document.getElementById('emailBroadcastDetails');
+      if (detailsText) {
+        detailsText.innerText = `New Order ${order.orderId} (₹${order.grandTotal}) from ${order.customer.name} was successfully recorded and sent to radhakrishnanoveltystore@gmail.com!`;
+      }
+      if (emailNotice) {
+        emailNotice.classList.remove('hidden');
+        setTimeout(() => {
+          emailNotice.classList.add('hidden');
+        }, 6000);
+      }
+    }
+
+    function closeOrderSuccessModal() {
+      document.getElementById('orderSuccessModal').classList.add('hidden');
+    }
+
+    function openTrackingModal() {
+      document.getElementById('orderTrackingModal').classList.remove('hidden');
+    }
+
+    function closeTrackingModal() {
+      document.getElementById('orderTrackingModal').classList.add('hidden');
+      document.getElementById('trackResultBox').classList.add('hidden');
+    }
+
+    function handleTrackOrder(e) {
+      e.preventDefault();
+      const orderId = document.getElementById('trackOrderIdInput').value.trim().toUpperCase();
+      const resBox = document.getElementById('trackResultBox');
+      
+      const found = ordersDatabase.find(o => o.orderId.toUpperCase() === orderId);
+      if (!found) {
+        resBox.classList.remove('hidden');
+        resBox.innerHTML = `
+          <div class="text-rose-600 bg-rose-50 p-3 rounded-xl border border-rose-200">
+            <i class="fa-solid fa-triangle-exclamation mr-1"></i> No order found with ID "${orderId}". Please verify and retry.
+          </div>
+        `;
+        return;
+      }
+
+      resBox.classList.remove('hidden');
+      resBox.innerHTML = `
+        <div class="bg-purple-50 p-3 rounded-xl border border-purple-200 space-y-1.5">
+          <div class="flex justify-between items-center">
+            <span class="font-bold text-purple-950">${found.orderId}</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${
+              found.status === 'Cancelled' ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'
+            }">${found.status}</span>
+          </div>
+          <div class="text-gray-600">Customer: <b>${found.customer.name}</b></div>
+          <div class="text-gray-600">Total: <b>₹${found.grandTotal}</b> (${found.paymentMethod})</div>
+          <div class="text-gray-500 text-[11px]">Placed on: ${found.date}</div>
+          <div class="pt-2 flex gap-2">
+            <button onclick="adminViewInvoice('${found.orderId}'); closeTrackingModal();" class="px-3 py-1 bg-purple-900 text-amber-300 rounded-lg text-xs font-bold">
+              View Tax Invoice
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderReviewsSection() {
+      const container = document.getElementById('reviewsListGrid');
+      const approved = customerReviews.filter(r => r.isApproved);
+
+      const avg = (approved.reduce((acc, r) => acc + r.rating, 0) / (approved.length || 1)).toFixed(1);
+      document.getElementById('avgRatingDisplay').innerText = avg;
+      document.getElementById('totalReviewsCountDisplay').innerText = `Based on ${approved.length} Verified Customer Reviews`;
+
+      container.innerHTML = approved.map(r => `
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-purple-100 flex flex-col justify-between hover:shadow-md transition">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex text-amber-400 text-xs">
+                ${getStarHtml(r.rating)}
+              </div>
+              <span class="text-[10px] text-gray-400">${r.date}</span>
+            </div>
+            <h4 class="font-bold text-sm text-purple-950 mb-1">“${r.title}”</h4>
+            <p class="text-xs text-gray-600 leading-relaxed">${r.comment}</p>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-purple-50 mt-4">
+            <span class="text-xs font-semibold text-purple-900">${r.author}</span>
+            ${r.verified ? '<span class="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full flex items-center gap-1"><i class="fa-solid fa-badge-check"></i> Verified Purchase</span>' : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openWriteReviewModal() {
+      document.getElementById('writeReviewModal').classList.remove('hidden');
+    }
+
+    function closeWriteReviewModal() {
+      document.getElementById('writeReviewModal').classList.add('hidden');
+    }
+
+    function setFormRating(stars) {
+      document.getElementById('reviewRatingInput').value = stars;
+      const icons = document.querySelectorAll('#starRatingSelector i');
+      icons.forEach((icon, idx) => {
+        if (idx < stars) {
+          icon.className = 'fa-solid fa-star';
+        } else {
+          icon.className = 'fa-regular fa-star';
+        }
+      });
+    }
+
+    function handleReviewSubmit(e) {
+      e.preventDefault();
+      const rating = parseInt(document.getElementById('reviewRatingInput').value, 10);
+      const author = document.getElementById('reviewAuthor').value.trim();
+      const title = document.getElementById('reviewTitle').value.trim();
+      const comment = document.getElementById('reviewComment').value.trim();
+
+      const newRev = {
+        id: `rev-${customerReviews.length + 1}`,
+        author: author,
+        rating: rating,
+        title: title,
+        comment: comment,
+        date: "Today",
+        isApproved: false, // Moderation queue
+        verified: true
+      };
+
+      customerReviews.unshift(newRev);
+      closeWriteReviewModal();
+      document.getElementById('reviewSubmitForm').reset();
+      setFormRating(5);
+
+      showToast('Thank you! Your review has been submitted and queued for store approval.');
+      refreshAdminMetrics();
+    }
+
+    function openAdminModal() {
+      document.getElementById('adminPortalModal').classList.remove('hidden');
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminPortalModal').classList.add('hidden');
+    }
+
+    // Password is set to aayush123 without any UI hints
+    function handleAdminLogin(event) {
+      event.preventDefault();
+      const pwd = document.getElementById('adminPasswordInput').value.trim();
+      const errorDiv = document.getElementById('adminLoginError');
+
+      if (pwd === "aayush123") {
+        errorDiv.classList.add('hidden');
+        document.getElementById('adminLoginView').classList.add('hidden');
+        document.getElementById('adminDashboardView').classList.remove('hidden');
+        document.getElementById('adminPasswordInput').value = '';
+        refreshAdminMetrics();
+      } else {
+        errorDiv.classList.remove('hidden');
+      }
+    }
+
+    function handleAdminLogout() {
+      document.getElementById('adminDashboardView').classList.add('hidden');
+      document.getElementById('adminLoginView').classList.remove('hidden');
+    }
+
+    function switchAdminTab(tabName) {
+      const tabs = ['liveOrders', 'ordersInvoices', 'reviewApproval', 'liveChatSupport', 'productsInventory', 'cancelledEmailsLog', 'messages'];
+      tabs.forEach(t => {
+        const el = document.getElementById(`adminTab-${t}`);
+        if (el) el.classList.add('hidden');
+        const btn = document.getElementById(`tabBtn-${t}`);
+        if (btn) {
+          btn.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-50 text-purple-900 hover:bg-purple-100 transition";
+        }
+      });
+
+      const activeSection = document.getElementById(`adminTab-${tabName}`);
+      if (activeSection) activeSection.classList.remove('hidden');
+
+      const activeBtn = document.getElementById(`tabBtn-${tabName}`);
+      if (activeBtn) {
+        activeBtn.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold bg-purple-900 text-amber-300 transition";
+      }
+
+      if (tabName === 'liveChatSupport') {
+        renderAdminChatFeed();
+      } else if (tabName === 'cancelledEmailsLog') {
+        renderCancellationEmailsLog();
+      }
+    }
+
+    function refreshAdminMetrics() {
+      // 1. Live Orders and Profits
+      const activeOrders = ordersDatabase.filter(o => o.status !== "Cancelled");
+      const totalRev = activeOrders.reduce((acc, o) => acc + o.grandTotal, 0);
+      const totalProfit = activeOrders.reduce((acc, o) => acc + o.profit, 0);
+      const itemsCount = activeOrders.reduce((acc, o) => acc + o.items.reduce((sum, it) => sum + it.qty, 0), 0);
+
+      document.getElementById('statRevenue').innerText = `₹${totalRev.toLocaleString('en-IN')}`;
+      document.getElementById('statProfit').innerText = `₹${totalProfit.toLocaleString('en-IN')}`;
+      document.getElementById('statTotalOrders').innerText = activeOrders.length;
+      document.getElementById('statItemsSold').innerText = itemsCount;
+
+      const liveOrdersTbody = document.getElementById('adminLiveOrdersBody');
+      if (ordersDatabase.length === 0) {
+        liveOrdersTbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-gray-400">No active orders placed yet.</td></tr>`;
+      } else {
+        liveOrdersTbody.innerHTML = ordersDatabase.map(o => `
+          <tr class="hover:bg-purple-50/50 ${o.status === 'Cancelled' ? 'opacity-50 bg-rose-50/30' : ''}">
+            <td class="p-3 font-mono font-bold text-purple-950">${o.orderId}</td>
+            <td class="p-3 font-medium">${o.customer.name}</td>
+            <td class="p-3 text-gray-600">${o.items.map(it => `${it.qty}x ${it.name}`).join(', ')}</td>
+            <td class="p-3 font-bold text-purple-950">₹${o.grandTotal}</td>
+            <td class="p-3 font-bold text-emerald-700">${o.status === 'Cancelled' ? '₹0' : '+ ₹' + o.profit}</td>
+            <td class="p-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${
+                o.status === 'Cancelled' ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'
+              }">${o.status}</span>
+            </td>
+            <td class="p-3 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                ${o.status !== 'Cancelled' ? `
+                  <button onclick="cancelOrder('${o.orderId}')" class="px-2.5 py-1 bg-amber-100 hover:bg-amber-200 text-amber-900 rounded-lg text-[10px] font-bold transition" title="Cancel this order">
+                    <i class="fa-solid fa-ban"></i> Cancel
+                  </button>
+                ` : `
+                  <button onclick="restoreOrder('${o.orderId}')" class="px-2.5 py-1 bg-purple-100 hover:bg-purple-200 text-purple-900 rounded-lg text-[10px] font-bold transition">
+                    <i class="fa-solid fa-rotate-left"></i> Restore
+                  </button>
+                `}
+                <button onclick="deleteOrder('${o.orderId}')" class="px-2.5 py-1 bg-rose-100 hover:bg-rose-200 text-rose-700 rounded-lg text-[10px] font-bold transition" title="Delete record permanently">
+                  <i class="fa-solid fa-trash-can"></i> Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // 2. Orders & Invoices Hub
+      const invoicesTbody = document.getElementById('adminInvoicesTableBody');
+      if (ordersDatabase.length === 0) {
+        invoicesTbody.innerHTML = `<tr><td colspan="7" class="p-4 text-center text-gray-400">No invoices generated yet.</td></tr>`;
+      } else {
+        invoicesTbody.innerHTML = ordersDatabase.map(o => `
+          <tr class="hover:bg-purple-50/50 ${o.status === 'Cancelled' ? 'opacity-60 bg-rose-50/30' : ''}">
+            <td class="p-3 font-mono font-bold text-purple-950">${o.invoiceNumber}</td>
+            <td class="p-3 font-mono text-gray-600">${o.orderId}</td>
+            <td class="p-3 font-medium">${o.customer.name} (${o.customer.phone})</td>
+            <td class="p-3 text-[11px] text-gray-600 max-w-xs truncate">${o.customer.address}, ${o.customer.city}</td>
+            <td class="p-3 font-bold text-pink-700">₹${o.grandTotal}</td>
+            <td class="p-3">
+              <span class="${o.status === 'Cancelled' ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'} text-[10px] font-bold px-2 py-0.5 rounded-full">
+                ${o.status}
+              </span>
+            </td>
+            <td class="p-3 text-center">
+              <div class="flex items-center justify-center gap-1.5">
+                <button onclick="adminViewInvoice('${o.orderId}')" class="px-2 py-1 bg-purple-900 text-amber-300 rounded-lg text-[11px] hover:bg-purple-950">
+                  <i class="fa-solid fa-eye"></i> Bill
+                </button>
+                <button onclick="adminDownloadInvoice('${o.orderId}')" class="px-2 py-1 bg-pink-600 text-white rounded-lg text-[11px] hover:bg-pink-700">
+                  <i class="fa-solid fa-download"></i> PDF
+                </button>
+                <button onclick="deleteOrder('${o.orderId}')" class="px-2 py-1 bg-rose-100 text-rose-700 hover:bg-rose-200 rounded-lg text-[11px]" title="Delete Invoice">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // 3. Review Approval Queue
+      const pendingReviews = customerReviews.filter(r => !r.isApproved);
+      document.getElementById('adminPendingReviewCount').innerText = pendingReviews.length;
+
+      const reviewsContainer = document.getElementById('adminReviewsQueue');
+      if (customerReviews.length === 0) {
+        reviewsContainer.innerHTML = `<p class="text-xs text-gray-500">No reviews found.</p>`;
+      } else {
+        reviewsContainer.innerHTML = customerReviews.map(r => `
+          <div class="p-3 rounded-2xl border ${r.isApproved ? 'bg-white border-purple-100' : 'bg-amber-50/60 border-amber-200'} flex items-start justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-bold text-xs text-purple-950">${r.author}</span>
+                <div class="text-amber-400 text-xs">${getStarHtml(r.rating)}</div>
+                <span class="text-[10px] text-gray-400">${r.date}</span>
+                ${r.isApproved ? '<span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold">Live on Store</span>' : '<span class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">Pending Approval</span>'}
+              </div>
+              <h5 class="text-xs font-bold text-gray-800 mt-1">"${r.title}"</h5>
+              <p class="text-xs text-gray-600 mt-0.5">${r.comment}</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              ${!r.isApproved ? `
+                <button onclick="approveReview('${r.id}')" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs transition">
+                  <i class="fa-solid fa-check mr-1"></i> Approve
+                </button>
+              ` : `
+                <button onclick="unapproveReview('${r.id}')" class="px-2.5 py-1.5 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold rounded-lg text-xs transition">
+                  Hide
+                </button>
+              `}
+              <button onclick="deleteReview('${r.id}')" class="p-1.5 text-rose-600 hover:text-rose-800 text-xs">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // 4. Products & Stock Manager
+      const productsTable = document.getElementById('adminProductsTableBody');
+      productsTable.innerHTML = productsDatabase.map(p => `
+        <tr class="hover:bg-purple-50/50">
+          <td class="p-2.5 flex items-center gap-2">
+            <img src="${p.image}" alt="${p.name}" class="w-8 h-8 rounded object-contain bg-white">
+            <span class="font-medium text-purple-950 truncate max-w-xs">${p.name}</span>
+          </td>
+          <td class="p-2.5 text-gray-600">${p.category}</td>
+          <td class="p-2.5 font-bold text-pink-700">₹${p.price}</td>
+          <td class="p-2.5">
+            <input type="number" min="0" value="${p.stock}" onchange="updateProductStock('${p.id}', this.value)" class="w-16 p-1 text-center border border-purple-200 rounded text-xs">
+          </td>
+          <td class="p-2.5 text-center">
+            <button onclick="deleteProduct('${p.id}')" class="text-rose-600 hover:text-rose-800 text-xs"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        </tr>
+      `).join('');
+
+      const catSelect = document.getElementById('newProdCategory');
+      if (catSelect && catSelect.children.length === 0) {
+        catSelect.innerHTML = CATEGORIES.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+      }
+
+      // 5. Contact Inquiries
+      const msgBox = document.getElementById('adminMessagesContainer');
+      if (contactSubmissions.length === 0) {
+        msgBox.innerHTML = `<p class="text-xs text-gray-500">No contact submissions received yet.</p>`;
+      } else {
+        msgBox.innerHTML = contactSubmissions.map(m => `
+          <div class="p-3 bg-purple-50 rounded-2xl border border-purple-100 text-xs space-y-1">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-purple-950">${m.name} (${m.phone})</span>
+              <span class="text-[10px] text-gray-400">${m.date}</span>
+            </div>
+            <div class="text-[11px] text-pink-700 font-semibold">Subject: ${m.subject} | Email: ${m.email}</div>
+            <p class="text-gray-700 pt-1">${m.message}</p>
+          </div>
+        `).join('');
+      }
+    }
+
+    function cancelOrder(orderId) {
+      const order = ordersDatabase.find(o => o.orderId === orderId);
+      if (!order) return;
+      order.status = "Cancelled";
+      refreshAdminMetrics();
+
+      // Compose Happy Note Email
+      const customerName = order.customer.name;
+      const customerEmail = order.customer.email || "customer@example.com";
+      const now = new Date();
+      const timeStr = `${now.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })} at ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+      const happyNoteBody = `Dear ${customerName},\n\n✨ Radhe Radhe! Warm blessings and joyful greetings from Radha Krishna Novelty Store! ✨\n\nWe have received your cancellation request for Order ID: ${order.orderId}.\n\nPlease do not worry at all! Your order has been smoothly cancelled. If you made an online payment, your complete refund of ₹${order.grandTotal} is being initiated and will reflect safely into your original payment account.\n\n🌟 A Little Joy For Your Next Visit:\nWe truly cherish you as part of our novelty family! Whenever you are ready to shop with us again for toys, gifts, stationery, or home decor, we will be waiting with open arms and exciting new collections.\n\nMay Lord Krishna and Radha Rani shower your home with immense happiness, prosperity, and radiant health!\n\nWith warmth and heartfelt smiles,\nRadha Krishna Novelty Store Team\n📍 Shop No. 12, Krishna Complex, Jamnagar, Gujarat\n📞 Contact: +91 98250 12345\n✉️ Email: radhakrishnanoveltystore@gmail.com`;
+
+      // Record in Sent Logs
+      const emailRecord = {
+        orderId: order.orderId,
+        customerName: customerName,
+        customerEmail: customerEmail,
+        timestamp: timeStr,
+        body: happyNoteBody
+      };
+      cancellationEmailsLog.unshift(emailRecord);
+
+      // Display dispatched modal notification
+      document.getElementById('cancelEmailToDisplay').innerText = `${customerName} (${customerEmail})`;
+      document.getElementById('cancelEmailOrderIdDisplay').innerText = order.orderId;
+      document.getElementById('cancelEmailBodyContent').innerText = happyNoteBody;
+      document.getElementById('cancelEmailNoticeModal').classList.remove('hidden');
+
+      showToast(`Order ${orderId} cancelled & happy note email dispatched to ${customerEmail}!`);
+    }
+
+    function renderCancellationEmailsLog() {
+      const container = document.getElementById('cancelledEmailsLogContainer');
+      if (!container) return;
+
+      if (cancellationEmailsLog.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-gray-400 bg-purple-50/50 rounded-2xl border border-purple-100">No cancellation emails sent yet.</div>`;
+        return;
+      }
+
+      container.innerHTML = cancellationEmailsLog.map(em => `
+        <div class="bg-purple-50/60 p-4 rounded-2xl border border-purple-200 text-xs space-y-2">
+          <div class="flex justify-between items-center border-b border-purple-100 pb-2">
+            <div>
+              <span class="font-bold text-purple-950">${em.customerName}</span>
+              <span class="text-purple-600 font-mono text-[11px] ml-1">&lt;${em.customerEmail}&gt;</span>
+            </div>
+            <div class="text-[10px] text-gray-500">${em.timestamp}</div>
+          </div>
+          <div class="text-amber-800 font-bold text-[11px]">
+            <i class="fa-solid fa-envelope mr-1 text-pink-600"></i> Subject: Order #${em.orderId} Cancellation & Happy Note
+          </div>
+          <div class="bg-white p-3 rounded-xl border border-purple-100 text-gray-700 whitespace-pre-line text-[11px] leading-relaxed shadow-xs">
+            ${em.body}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function restoreOrder(orderId) {
+      const order = ordersDatabase.find(o => o.orderId === orderId);
+      if (!order) return;
+      order.status = "Confirmed & Invoiced";
+      refreshAdminMetrics();
+      showToast(`Order ${orderId} restored.`);
+    }
+
+    function deleteOrder(orderId) {
+      ordersDatabase = ordersDatabase.filter(o => o.orderId !== orderId);
+      refreshAdminMetrics();
+      showToast(`Order ${orderId} and its invoice deleted successfully.`);
+    }
+
+    function toggleLiveChat() {
+      const chatWin = document.getElementById('chatWindow');
+      chatWin.classList.toggle('hidden');
+    }
+
+    function sendQuickChatMessage(text) {
+      document.getElementById('liveChatInputField').value = text;
+      handleSendChatMessage();
+    }
+
+    function handleSendChatMessage(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('liveChatInputField');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+      // Push customer message to liveChatHistory for owner portal view
+      liveChatHistory.push({
+        sender: "customer",
+        text: text,
+        time: timeStr
+      });
+      renderAdminChatFeed();
+
+      const body = document.getElementById('chatMessagesBody');
+
+      const userBubble = document.createElement('div');
+      userBubble.className = "flex justify-end";
+      userBubble.innerHTML = `
+        <div class="bg-gradient-to-r from-purple-800 to-pink-600 text-white p-3 rounded-2xl rounded-tr-none shadow-sm max-w-[80%] leading-relaxed">
+          ${text}
+        </div>
+      `;
+      body.appendChild(userBubble);
+      input.value = '';
+      body.scrollTop = body.scrollHeight;
+
+      // AUTOMATION RULE: Automation runs ONLY 1 TIME per customer session.
+      // After that 1 automation, no bot answers run; the store owner replies directly via the Admin Portal.
+      if (!hasAutomatedReplyFired) {
+        hasAutomatedReplyFired = true; // Mark as fired so it never triggers again
+
+        setTimeout(() => {
+          let reply = "✨ Radhe Radhe! Thank you for contacting Radha Krishna Novel Store. Our store owner in Jamnagar has received your query and will reply directly in this chat thread shortly!";
+          const lower = text.toLowerCase();
+          
+          if (lower.includes('jamnagar') || lower.includes('deliver') || lower.includes('shipping')) {
+            reply = "✨ Radhe Radhe! Yes, we offer express same-day / 24-hr delivery in Jamnagar & across Gujarat. Free shipping applies on orders above ₹499! The store owner will attend to your order details shortly.";
+          } else if (lower.includes('coupon') || lower.includes('discount') || lower.includes('code')) {
+            reply = "✨ Radhe Radhe! Coupons available: 'FIRST10' for 10% off your first purchase, or 'SPECIAL999' for ₹150 off on orders above ₹999. The store owner is also here if you need bulk quotes.";
+          } else if (lower.includes('return gift') || lower.includes('bulk') || lower.includes('party')) {
+            reply = "✨ Radhe Radhe! We specialize in birthday return gift packs & party bundles. Our store owner will reply to you directly right here, or you can call +91 98250 12345.";
+          }
+
+          liveChatHistory.push({
+            sender: "store",
+            text: reply,
+            time: timeStr
+          });
+          renderAdminChatFeed();
+
+          const botBubble = document.createElement('div');
+          botBubble.className = "flex items-start gap-2";
+          botBubble.innerHTML = `
+            <div class="w-7 h-7 rounded-full bg-purple-900 text-amber-300 flex items-center justify-center text-[10px] font-bold shrink-0">RK</div>
+            <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-purple-100 max-w-[80%] text-gray-800 leading-relaxed">
+              <span class="text-[10px] font-bold text-pink-600 block mb-0.5">Automated Greeting (1-time)</span>
+              ${reply}
+            </div>
+          `;
+          body.appendChild(botBubble);
+          body.scrollTop = body.scrollHeight;
+        }, 600);
+      } else {
+        // Subsequent messages: display "Wait For Owners Reply"
+        const notifyBubble = document.createElement('div');
+        notifyBubble.className = "wait-owner-msg text-center text-[11px] text-purple-900 bg-amber-100 border border-amber-300 py-1.5 px-3 rounded-full my-1.5 font-bold shadow-xs";
+        notifyBubble.innerHTML = `<i class="fa-solid fa-hourglass-half mr-1 text-amber-600"></i> Wait For Owners Reply`;
+        body.appendChild(notifyBubble);
+        body.scrollTop = body.scrollHeight;
+      }
+    }
+
+    function approveReview(id) {
+      const r = customerReviews.find(x => x.id === id);
+      if (r) {
+        r.isApproved = true;
+        renderReviewsSection();
+        refreshAdminMetrics();
+        showToast(`Review approved and now live on the storefront!`);
+      }
+    }
+
+    function unapproveReview(id) {
+      const r = customerReviews.find(x => x.id === id);
+      if (r) {
+        r.isApproved = false;
+        renderReviewsSection();
+        refreshAdminMetrics();
+        showToast(`Review hidden from storefront.`);
+      }
+    }
+
+    function deleteReview(id) {
+      customerReviews = customerReviews.filter(x => x.id !== id);
+      renderReviewsSection();
+      refreshAdminMetrics();
+      showToast('Review deleted.');
+    }
+
+    function adminViewInvoice(orderId) {
+      const ord = ordersDatabase.find(o => o.orderId === orderId);
+      if (!ord) return;
+      populateInvoiceModal(ord);
+      document.getElementById('orderSuccessModal').classList.remove('hidden');
+    }
+
+    function adminDownloadInvoice(orderId) {
+      const ord = ordersDatabase.find(o => o.orderId === orderId);
+      if (!ord) return;
+      currentInvoiceData = ord;
+      downloadInvoicePDF();
+    }
+
+    let uploadedProductImageBase64 = null;
+
+    function handleProductImageUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      const nameDisplay = document.getElementById('uploadFileNameDisplay');
+      const previewContainer = document.getElementById('imagePreviewContainer');
+      const previewThumb = document.getElementById('imagePreviewThumb');
+
+      if (!file) {
+        uploadedProductImageBase64 = null;
+        if (nameDisplay) nameDisplay.innerText = "No image selected yet";
+        if (previewContainer) previewContainer.classList.add('hidden');
+        return;
+      }
+
+      if (nameDisplay) nameDisplay.innerText = file.name;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        uploadedProductImageBase64 = e.target.result;
+        if (previewThumb) previewThumb.src = uploadedProductImageBase64;
+        if (previewContainer) previewContainer.classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function toggleAddProductForm() {
+      const box = document.getElementById('addProductFormContainer');
+      box.classList.toggle('hidden');
+    }
+
+    function handleCreateProduct(e) {
+      e.preventDefault();
+      const name = document.getElementById('newProdName').value.trim();
+      const cat = document.getElementById('newProdCategory').value;
+      const price = parseFloat(document.getElementById('newProdPrice').value);
+      const orig = parseFloat(document.getElementById('newProdOrigPrice').value);
+      const stock = parseInt(document.getElementById('newProdStock').value, 10);
+      const desc = document.getElementById('newProdDesc').value.trim();
+
+      if (!uploadedProductImageBase64) {
+        showToast('Please select and upload an image file for this product.', 'error');
+        return;
+      }
+
+      const newP = {
+        id: `prod-${Date.now()}`,
+        sku: `RK-NOV-${Math.floor(10 + Math.random()*90)}`,
+        name: name,
+        category: cat,
+        price: price,
+        originalPrice: orig,
+        stock: stock,
+        rating: 5.0,
+        reviewsCount: 1,
+        costPrice: Math.round(price * 0.65),
+        isBestseller: false,
+        image: uploadedProductImageBase64,
+        description: desc
+      };
+
+      productsDatabase.unshift(newP);
+      document.getElementById('newProductForm').reset();
+      uploadedProductImageBase64 = null;
+      document.getElementById('uploadFileNameDisplay').innerText = "No image selected yet";
+      document.getElementById('imagePreviewContainer').classList.add('hidden');
+      toggleAddProductForm();
+      renderProductGrid();
+      refreshAdminMetrics();
+      showToast(`Product "${name}" added to catalog with uploaded image successfully!`);
+    }
+
+    function updateProductStock(id, newStock) {
+      const p = productsDatabase.find(x => x.id === id);
+      if (p) {
+        p.stock = parseInt(newStock, 10);
+        showToast(`Stock updated for ${p.name}`);
+        renderProductGrid();
+      }
+    }
+
+    function deleteProduct(id) {
+      productsDatabase = productsDatabase.filter(x => x.id !== id);
+      renderProductGrid();
+      refreshAdminMetrics();
+      showToast('Product removed from catalog.');
+    }
+
+    function navigateTo(sectionId) {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function toggleMobileNav() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value.trim();
+      const phone = document.getElementById('contactPhone').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const subject = document.getElementById('contactSubject').value;
+      const message = document.getElementById('contactMessage').value.trim();
+
+      contactSubmissions.unshift({
+        name, phone, email, subject, message,
+        date: "Today"
+      });
+
+      document.getElementById('contactForm').reset();
+      showToast('Message sent! Our store representative will get in touch with you shortly.');
+      refreshAdminMetrics();
+    }
+
+    function handleNewsletter(e) {
+      e.preventDefault();
+      e.target.reset();
+      showToast('Radhe Radhe! You are now subscribed to our festival offers.');
+    }
+
+    function openPolicyModal(title) {
+      const titles = {
+        'Shipping Policy': `We dispatch orders within 24 hours from Jamnagar, Gujarat. Free delivery is available across all serviceable Indian pincodes on orders exceeding ₹499. Tracking details are sent automatically.`,
+        'Return and Refund Policy': `We accept hassle-free returns within 7 days of package delivery for damaged, defective, or incorrect novelty items. Full refund is processed directly via original payment mode or bank transfer.`,
+        'Privacy Policy': `Radha Krishna Novelty Store values your privacy. We never share customer contact numbers, addresses, or order details with third parties. Transactions are processed via encrypted gateways.`,
+        'Terms and Conditions': `All prices are quoted in Indian Rupees (₹) and include applicable taxes. Products are subject to stock availability.`
+      };
+
+      document.getElementById('policyModalTitle').innerText = title;
+      document.getElementById('policyModalContent').innerText = titles[title] || "Information available upon request.";
+      document.getElementById('policyModal').classList.remove('hidden');
+    }
+
+    function closePolicyModal() {
+      document.getElementById('policyModal').classList.add('hidden');
+    }
+
+    // Friendly Toast notifications (Avoid alert())
+    function showToast(message, type = 'success') {
+      const existing = document.getElementById('activeToastNotification');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'activeToastNotification';
+      toast.className = `fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl shadow-2xl text-xs font-semibold flex items-center gap-3 transition-all duration-300 transform translate-y-4 opacity-0 border ${
+        type === 'error' 
+          ? 'bg-rose-900 text-white border-rose-700' 
+          : 'bg-purple-950 text-amber-300 border-amber-400'
+      }`;
+      
+      const icon = type === 'error' ? 'fa-triangle-exclamation' : 'fa-bell';
+      toast.innerHTML = `<i class="fa-solid ${icon}"></i> <span>${message}</span>`;
+      
+      document.body.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-4', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4');
+        setTimeout(() => toast.remove(), 400);
+      }, 3500);
+    }
+
+    // Initialize application on load
+    window.onload = function() {
+      renderCategories();
+      renderCategoryChips();
+      renderProductGrid();
+      renderReviewsSection();
+      updateCartUI();
+      renderAdminChatFeed();
+    };
+  </script>
+</body>
+</html>
